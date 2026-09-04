@@ -1,0 +1,63 @@
+{
+  "protocol": "Z",
+  "name": "wydanie i migracja wersji procesu",
+  "project": "sdlc",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01YDvBaqq1Ge24NRUkcQv5n3"
+    ]
+  },
+  "started": "20260904T192500Z",
+  "description": "Wydanie wersji v1.1.0 procesu z wytyczną o przebiegach CI.",
+  "interactions": 3,
+  "corrections": [],
+  "measurements": {
+    "decisions_added": {
+      "definition": "decyzje, które doszły w zasobie",
+      "value": 2
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 1
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "decisions_renumbered": {
+      "definition": "decyzje o zmienionym identyfikatorze",
+      "value": 0
+    },
+    "references_fixed": {
+      "definition": "poprawione odwołania do decyzji i plików",
+      "value": 3
+    },
+    "documents_adapted": {
+      "definition": "dokumenty projektu zmienione przez migrację",
+      "value": 0
+    },
+    "owner_conflicts": {
+      "definition": "kolizje reguły zasobu z decyzją projektu",
+      "value": 0
+    },
+    "protocols_adapted": {
+      "definition": "protokoły projektu zmienione przez migrację",
+      "value": 0
+    },
+    "protocols_added": {
+      "definition": "protokoły dodane",
+      "value": 0
+    },
+    "protocols_removed": {
+      "definition": "protokoły usunięte",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    }
+  },
+  "finished": "20260904T192212Z",
+  "run_id": "50b23fb"
+}
