@@ -1,0 +1,43 @@
+{
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01T6VNU7mjqPbpZxqWGE9FVA"
+    ]
+  },
+  "started": "20260904T192900Z",
+  "description": "Zaplanowanie obowiązkowych skryptów otwarcia i zamknięcia protokołu oraz blokady scalenia z otwartym protokołem.",
+  "interactions": 4,
+  "corrections": [],
+  "measurements": {
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 4
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 2
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 2
+    },
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    }
+  },
+  "finished": "20260904T195318Z",
+  "run_id": "4c3c5ca"
+}

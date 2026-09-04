@@ -1,0 +1,50 @@
+{
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01T6VNU7mjqPbpZxqWGE9FVA"
+    ]
+  },
+  "started": "20260904T195318Z",
+  "description": "Wykonanie projektu zmiany o skryptach otwarcia i zamknięcia protokołu.",
+  "interactions": 4,
+  "corrections": [],
+  "measurements": {
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 11
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 1
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 2
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi poprawki w pętli przeglądu",
+      "value": 0
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję Poza zakresem",
+      "value": 0
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 3
+    }
+  },
+  "finished": "20260904T200854Z"
+}
