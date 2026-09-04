@@ -1,0 +1,19 @@
+{
+  "project": "agent-skills",
+  "process": "protokol-a-b",
+  "run_id": "37129fb",
+  "measurements": {
+    "plan_questions": {
+      "definition": "liczba pytań przedstawionych właścicielowi w Protokole A",
+      "value": 1
+    },
+    "review_corrections": {
+      "definition": "liczba odpowiedzi poprawki w pętli przeglądu Protokołu B",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "liczba próśb o przegląd przedstawionych właścicielowi w Protokole B",
+      "value": 1
+    }
+  }
+}
