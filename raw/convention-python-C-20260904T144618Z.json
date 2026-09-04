@@ -1,0 +1,71 @@
+{
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "convention-python",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01JCtQZ2PdXkgarWY5YwB6z3"
+    ]
+  },
+  "started": "20260904T084500Z",
+  "description": "Zbudowanie konwencji Pythona i jej weryfikacji.",
+  "interactions": 21,
+  "corrections": [
+    {
+      "kind": "zakres",
+      "description": "Właściciel rozszerzył pracę na wszystkie projekty."
+    },
+    {
+      "kind": "jezyk",
+      "description": "Repozytorium spinające przemianowane na developerskie."
+    },
+    {
+      "kind": "jezyk",
+      "description": "Skrzynka przemianowana na inbox."
+    },
+    {
+      "kind": "jezyk",
+      "description": "Brama weryfikacji przemianowana na automatyczną weryfikację."
+    },
+    {
+      "kind": "tresc",
+      "description": "Decyzja o planowaniu zamieniona na wytyczną."
+    },
+    {
+      "kind": "decyzja",
+      "description": "Decyzje dostały przestrzeń nazw per repozytorium."
+    },
+    {
+      "kind": "decyzja",
+      "description": "Wersjonowanie tagiem zawężone do zasobów procesowych."
+    },
+    {
+      "kind": "tresc",
+      "description": "Wyjście weryfikacji zamienione na JSON."
+    },
+    {
+      "kind": "proces",
+      "description": "Kaskadowa podmiana zepsuła nagłówki decyzji; naprawione."
+    }
+  ],
+  "measurements": {
+    "files_changed": {
+      "definition": "zmienione pliki we wszystkich repozytoriach",
+      "value": 295
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 3
+    },
+    "escalations": {
+      "definition": "powroty do planowania",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 11
+    }
+  },
+  "finished": "20260904T144618Z"
+}
