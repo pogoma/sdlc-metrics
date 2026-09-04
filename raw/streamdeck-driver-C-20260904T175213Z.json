@@ -1,0 +1,40 @@
+{
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "streamdeck-driver",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01YDvBaqq1Ge24NRUkcQv5n3"
+    ]
+  },
+  "started": "20260904T175000Z",
+  "description": "Pełna historia przy wystawianiu pull requestów w przebiegu sterownika.",
+  "interactions": 3,
+  "corrections": [
+    {
+      "kind": "jezyk",
+      "description": "Właściciel zamienił termin żądanie scalenia na pull request."
+    }
+  ],
+  "measurements": {
+    "files_changed": {
+      "definition": "zmienione pliki we wszystkich repozytoriach",
+      "value": 2
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 1
+    },
+    "escalations": {
+      "definition": "powroty do planowania",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    }
+  },
+  "finished": "20260904T175213Z",
+  "run_id": "ddbcdc5"
+}
