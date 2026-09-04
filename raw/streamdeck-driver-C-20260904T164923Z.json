@@ -1,0 +1,34 @@
+{
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "streamdeck-driver",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01YDvBaqq1Ge24NRUkcQv5n3"
+    ]
+  },
+  "started": "20260904T164000Z",
+  "description": "Instalacja dodatków warstwy aplikacji w przebiegu weryfikacji w CI.",
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "files_changed": {
+      "definition": "zmienione pliki we wszystkich repozytoriach",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    },
+    "escalations": {
+      "definition": "powroty do planowania",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    }
+  },
+  "finished": "20260904T164923Z"
+}
