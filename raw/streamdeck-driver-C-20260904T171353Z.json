@@ -1,0 +1,35 @@
+{
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "streamdeck-driver",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01YDvBaqq1Ge24NRUkcQv5n3"
+    ]
+  },
+  "started": "20260904T170500Z",
+  "description": "Dostęp przebiegu weryfikacji do prywatnych submodułów przez klucze wdrożeniowe.",
+  "interactions": 5,
+  "corrections": [],
+  "measurements": {
+    "files_changed": {
+      "definition": "zmienione pliki we wszystkich repozytoriach",
+      "value": 2
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 1
+    },
+    "escalations": {
+      "definition": "powroty do planowania",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    }
+  },
+  "finished": "20260904T171353Z",
+  "run_id": "31eb389"
+}
