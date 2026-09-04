@@ -1,0 +1,52 @@
+{
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "streamdeck-driver",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01YDvBaqq1Ge24NRUkcQv5n3"
+    ]
+  },
+  "started": "20260904T150000Z",
+  "description": "Zaplanowanie serwera MCP wystawiającego demona panelu agentom AI.",
+  "interactions": 8,
+  "corrections": [
+    {
+      "kind": "decyzja",
+      "description": "Właściciel wybrał oficjalne SDK mcp zamiast własnej implementacji protokołu."
+    },
+    {
+      "kind": "zakres",
+      "description": "Serwer obsługuje wyłącznie rewizję 2026-07-28, bez er starszych."
+    }
+  ],
+  "measurements": {
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 4
+    },
+    "question_rounds": {
+      "definition": "zatrzymania na pytaniach",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 2
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na materiał badawczy",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 2
+    },
+    "approval_rounds": {
+      "definition": "przedstawienia projektu zmiany do zatwierdzenia",
+      "value": 1
+    }
+  },
+  "finished": "20260904T151855Z",
+  "run_id": "ccf1c84"
+}

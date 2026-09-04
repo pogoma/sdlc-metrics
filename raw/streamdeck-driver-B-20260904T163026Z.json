@@ -1,0 +1,60 @@
+{
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "streamdeck-driver",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01YDvBaqq1Ge24NRUkcQv5n3"
+    ]
+  },
+  "started": "20260904T151900Z",
+  "description": "Realizacja serwera MCP wystawiającego demona panelu agentom AI.",
+  "interactions": 5,
+  "corrections": [
+    {
+      "kind": "narzedzie",
+      "description": "Brak SDK mcp na maszynie; właściciel wybrał środowisko wirtualne w repozytorium."
+    },
+    {
+      "kind": "tresc",
+      "description": "Sekcja Walidacja miała polecenia, które nie dają zapisanego wyniku; poprawione."
+    }
+  ],
+  "measurements": {
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 9
+    },
+    "steps_deviated": {
+      "definition": "kroki o wyniku rozjeżdżającym się z zapisanym",
+      "value": 0
+    },
+    "plan_gaps": {
+      "definition": "przypadki, w których projekt zmiany okazał się zły albo niepełny",
+      "value": 1
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi poprawki w pętli przeglądu",
+      "value": 0
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję Poza zakresem",
+      "value": 0
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    }
+  },
+  "finished": "20260904T163026Z",
+  "run_id": "a00f352"
+}
