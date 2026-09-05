@@ -1,0 +1,62 @@
+{
+  "protocol": "Z",
+  "name": "wydanie i migracja wersji procesu",
+  "project": "convention-python",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01T6VNU7mjqPbpZxqWGE9FVA"
+    ]
+  },
+  "started": "20260905T065350Z",
+  "description": "Druga część migracji: przebiegi CI według SDLC-0023 i SDLC-0024.",
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "decisions_added": {
+      "definition": "decyzje, które doszły w zasobie",
+      "value": 0
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 0
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "decisions_renumbered": {
+      "definition": "decyzje, które zmieniły identyfikator albo właściciela",
+      "value": 0
+    },
+    "documents_adapted": {
+      "definition": "dokumenty projektu zmienione przez migrację",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_conflicts": {
+      "definition": "kolizje reguły zasobu z decyzją projektu",
+      "value": 0
+    },
+    "protocols_adapted": {
+      "definition": "protokoły projektu zmienione przez migrację",
+      "value": 0
+    },
+    "protocols_added": {
+      "definition": "protokoły dodane, bo doszły w procesie",
+      "value": 0
+    },
+    "protocols_removed": {
+      "definition": "protokoły usunięte, bo zniknęły w procesie",
+      "value": 0
+    },
+    "references_fixed": {
+      "definition": "poprawione odwołania do decyzji i do plików",
+      "value": 0
+    }
+  },
+  "finished": "20260905T065353Z"
+}
