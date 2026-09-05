@@ -1,0 +1,34 @@
+{
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "convention-python",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01T6VNU7mjqPbpZxqWGE9FVA"
+    ]
+  },
+  "started": "20260905T073244Z",
+  "description": "Dodanie .gitkeep do pustego katalogu decyzji, żeby przetrwał klonowanie.",
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 1
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    }
+  },
+  "finished": "20260905T073257Z"
+}
