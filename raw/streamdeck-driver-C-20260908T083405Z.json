@@ -1,0 +1,34 @@
+{
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "streamdeck-driver",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "https://claude.ai/code/session_019goAcvoWNachNW6fLF4X2E"
+    ]
+  },
+  "started": "20260908T083339Z",
+  "description": "podbicie wskaźnika sterownika na rewizję scaloną do gałęzi głównej",
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 2
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    }
+  },
+  "finished": "20260908T083405Z"
+}
