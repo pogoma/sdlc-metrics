@@ -1,0 +1,55 @@
+{
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "description": "Realizacja projektu zmiany: katalog przebiegów .protocols.d, kroki i commit kontrolny",
+  "started": "20260909T112846Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01BDZEhun6hDMjq5Eg7Mpxda"
+    ]
+  },
+  "interactions": 4,
+  "corrections": [
+    {
+      "kind": "decyzja",
+      "description": "Właściciel zmienił zapis kroku: checkpoints trzyma rewizję sprzed kroku, nie commit kontrolny."
+    }
+  ],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 1
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 1
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 14
+    }
+  },
+  "finished": "20260909T133251Z"
+}
