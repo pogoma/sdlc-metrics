@@ -1,0 +1,51 @@
+{
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "description": "Wersjonowanie metryk: schematy JSON Schema, skrypty migracji i protokoły migracji oraz nowej wersji schematu.",
+  "started": "20260910T163522Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_018cXJt4aM245Fi5hs6FNL5N"
+    ]
+  },
+  "interactions": 6,
+  "corrections": [
+    {
+      "kind": "decyzja",
+      "description": "Właściciel zmienił odpowiedź o miejscu weryfikacji skryptów metryk na repozytorium developerskie."
+    },
+    {
+      "kind": "jezyk",
+      "description": "Właściciel zakazał słowa proza i zażądał polskich opisów pól w schemacie."
+    }
+  ],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 2
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 3
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 5
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 2
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 0
+    }
+  },
+  "finished": "20260910T170339Z"
+}
