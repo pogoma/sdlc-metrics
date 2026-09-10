@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "uid": "caaad93489454cf3b7faafa316ceba85",
+  "protocol": "Z",
+  "name": "wydanie i migracja wersji procesu",
+  "project": "sdlc",
+  "description": "Wydanie wersji v4.0.0 procesu: wersjonowanie pomiarów schematem i migracja.",
+  "migration_gaps": [],
+  "started": "20260910T180000Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_018cXJt4aM245Fi5hs6FNL5N"
+    ]
+  },
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "decisions_added": {
+      "definition": "decyzje, które doszły w zasobie",
+      "value": 1
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 2
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "decisions_renumbered": {
+      "definition": "decyzje, które zmieniły identyfikator albo właściciela",
+      "value": 0
+    },
+    "documents_adapted": {
+      "definition": "dokumenty projektu zmienione przez migrację",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_conflicts": {
+      "definition": "kolizje reguły zasobu z decyzją projektu",
+      "value": 0
+    },
+    "protocols_adapted": {
+      "definition": "protokoły projektu zmienione przez migrację",
+      "value": 0
+    },
+    "protocols_added": {
+      "definition": "protokoły dodane, bo doszły w procesie",
+      "value": 0
+    },
+    "protocols_removed": {
+      "definition": "protokoły usunięte, bo zniknęły w procesie",
+      "value": 0
+    },
+    "references_fixed": {
+      "definition": "poprawione odwołania do decyzji i do plików",
+      "value": 0
+    }
+  },
+  "finished": "20260910T180152Z"
+}
