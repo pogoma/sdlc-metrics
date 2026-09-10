@@ -1,0 +1,51 @@
+{
+  "schema_version": 2,
+  "uid": "1e2f8c62274b40db98d4f7ff0edeb853",
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01T6VNU7mjqPbpZxqWGE9FVA"
+    ]
+  },
+  "description": "Naprawa reguły pomiaru w oknie między commitem metryk a commitem repozytorium developerskiego.",
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 1
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 0
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 0
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 0
+    }
+  },
+  "migration_gaps": [
+    {
+      "field": "uid",
+      "from_version": 1,
+      "reason": "wersja 1 nie miała identyfikatora wywołania; nadany przy migracji"
+    }
+  ],
+  "started": "20260904T203308Z",
+  "finished": "20260905T054151Z"
+}

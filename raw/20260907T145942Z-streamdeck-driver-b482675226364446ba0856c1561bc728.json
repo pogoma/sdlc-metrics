@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "uid": "b482675226364446ba0856c1561bc728",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "streamdeck-driver",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "https://claude.ai/code/session_01JbA8pp4R9te6L62pt2sBLS"
+    ]
+  },
+  "description": "realizacja konfiguratora panelu: API paczki w demonie i konfiguracja z pięciu klientów",
+  "interactions": 21,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 5
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 6
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 2
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 5
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 7
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 1
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 0
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 22
+    }
+  },
+  "migration_gaps": [
+    {
+      "field": "uid",
+      "from_version": 1,
+      "reason": "wersja 1 nie miała identyfikatora wywołania; nadany przy migracji"
+    }
+  ],
+  "started": "20260907T092915Z",
+  "finished": "20260907T145942Z"
+}

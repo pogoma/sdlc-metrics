@@ -1,0 +1,43 @@
+{
+  "schema_version": 2,
+  "uid": "2de617ba48654a9c835206fe12e8d0e0",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01BDZEhun6hDMjq5Eg7Mpxda"
+    ]
+  },
+  "description": "Podbicie wskaźnika procesu na scaloną gałąź główną",
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 1
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    }
+  },
+  "migration_gaps": [
+    {
+      "field": "uid",
+      "from_version": 1,
+      "reason": "wersja 1 nie miała identyfikatora wywołania; nadany przy migracji"
+    }
+  ],
+  "started": "20260909T133957Z",
+  "finished": "20260909T134019Z"
+}

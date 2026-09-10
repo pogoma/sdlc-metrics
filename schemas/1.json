@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pomiar procesu, wersja 1",
+  "description": "Kształt pomiaru ustalony przez SDLC-0013. Wersji 1 nie deklaruje się polem: pomiarem wersji 1 jest plik w katalogu raw bez pola schema_version.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["protocol", "name", "project", "agent", "description",
+               "interactions", "corrections", "measurements"],
+  "properties": {
+    "protocol": {
+      "type": "string",
+      "pattern": "^[A-Z0-9]+(?:-[A-Z0-9]+)*$",
+      "description": "Identyfikator protokołu w tym projekcie, na przykład A. Wielkie litery, cyfry i myślnik."
+    },
+    "name": {
+      "$ref": "#/$defs/name",
+      "description": "Nazwa protokołu, na przykład planowanie zmiany."
+    },
+    "project": {
+      "$ref": "#/$defs/name",
+      "description": "Nazwa projektu, czyli repozytorium developerskiego bez przyrostka."
+    },
+    "agent": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["name", "sessions"],
+      "description": "Kto prowadził przebieg.",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/name",
+          "description": "Nazwa agenta, który prowadził przebieg."
+        },
+        "sessions": {
+          "type": "array",
+          "minItems": 1,
+          "description": "Identyfikatory sesji agenta. Lista, bo przebieg bywa wznawiany.",
+          "items": {
+            "$ref": "#/$defs/name",
+            "description": "Identyfikator jednej sesji."
+          }
+        }
+      }
+    },
+    "description": {
+      "$ref": "#/$defs/description",
+      "description": "Czego dotyczył przebieg. Przy przebiegu zatrzymanym mówi, na czym stanął."
+    },
+    "interactions": {
+      "$ref": "#/$defs/count",
+      "description": "Liczba wymian z człowiekiem: pytanie, odpowiedź, uwaga, potwierdzenie."
+    },
+    "corrections": {
+      "type": "array",
+      "description": "Poprawki działania protokołu: co właściciel musiał naprawić w przebiegu.",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["kind", "description"],
+        "description": "Jedna poprawka.",
+        "properties": {
+          "kind": {
+            "type": "string",
+            "enum": ["zakres", "tresc", "proces", "jezyk", "decyzja", "narzedzie"],
+            "description": "Rodzaj poprawki z zamkniętej listy, bo dopiero to pozwala je zliczyć. Kiedy który, mówi wytyczna o pomiarze procesu."
+          },
+          "description": {
+            "$ref": "#/$defs/description",
+            "description": "Co właściciel musiał naprawić."
+          }
+        }
+      }
+    },
+    "measurements": {
+      "$ref": "#/$defs/measurements",
+      "description": "Wielkości właściwe dla protokołu; wymienia je wytyczna o pomiarze procesu albo dokument protokołu."
+    },
+    "started": {
+      "$ref": "#/$defs/stamp",
+      "description": "Znacznik czasu otwarcia przebiegu. Pole nieobowiązkowe."
+    },
+    "finished": {
+      "$ref": "#/$defs/stamp",
+      "description": "Znacznik czasu zamknięcia przebiegu. Pole nieobowiązkowe."
+    },
+    "run_id": {
+      "$ref": "#/$defs/name",
+      "description": "Identyfikator commita, w którym zmiana trafiła do repozytorium. Pole nieobowiązkowe."
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "pattern": "\\S",
+      "description": "Krótki tekst do 120 znaków, niepusty."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "\\S",
+      "description": "Tekst do 200 znaków, niepusty."
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Liczba całkowita nieujemna."
+    },
+    "stamp": {
+      "type": "string",
+      "pattern": "^\\d{8}T\\d{6}Z$",
+      "description": "Znacznik czasu w postaci RRRRMMDDTGGMMSSZ, w czasie UTC."
+    },
+    "measurements": {
+      "type": "object",
+      "description": "Wielkości protokołu; kluczem jest nazwa wielkości.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["definition", "value"],
+        "description": "Jedna wielkość: co zlicza i ile naliczyła.",
+        "properties": {
+          "definition": {
+            "$ref": "#/$defs/description",
+            "description": "Co ta wielkość zlicza. Definicja jedzie przy wartości, żeby zestawienie nie zestawiało wielkości o różnym znaczeniu."
+          },
+          "value": {
+            "$ref": "#/$defs/count",
+            "description": "Zliczona wartość."
+          }
+        }
+      }
+    }
+  }
+}

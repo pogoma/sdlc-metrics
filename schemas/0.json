@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Pomiar procesu, wersja 0",
+  "description": "Kształt pomiarów sprzed ustalenia wzorca. Wersji 0 nie deklaruje się polem: pomiarem wersji 0 jest plik leżący w katalogu legacy.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["project", "process", "run_id", "measurements"],
+  "properties": {
+    "project": {
+      "$ref": "#/$defs/name",
+      "description": "Nazwa projektu, czyli repozytorium developerskiego bez przyrostka."
+    },
+    "process": {
+      "$ref": "#/$defs/name",
+      "description": "Nazwa przebytej ścieżki protokołów, na przykład protokol-a-b. Późniejsze wersje rozdzielają ją na protocol i name."
+    },
+    "run_id": {
+      "$ref": "#/$defs/name",
+      "description": "Identyfikator commita, w którym zmiana trafiła do repozytorium."
+    },
+    "measurements": {
+      "$ref": "#/$defs/measurements",
+      "description": "Wielkości właściwe dla przebytej ścieżki protokołów."
+    }
+  },
+  "$defs": {
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 120,
+      "pattern": "\\S",
+      "description": "Krótki tekst do 120 znaków, niepusty."
+    },
+    "description": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 200,
+      "pattern": "\\S",
+      "description": "Tekst do 200 znaków, niepusty."
+    },
+    "count": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Liczba całkowita nieujemna."
+    },
+    "measurements": {
+      "type": "object",
+      "description": "Wielkości protokołu; kluczem jest nazwa wielkości.",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["definition", "value"],
+        "properties": {
+          "definition": {
+            "$ref": "#/$defs/description",
+            "description": "Co ta wielkość zlicza. Definicja jedzie przy wartości, żeby zestawienie nie zestawiało wielkości o różnym znaczeniu."
+          },
+          "value": {
+            "$ref": "#/$defs/count",
+            "description": "Zliczona wartość."
+          }
+        }
+      }
+    }
+  }
+}

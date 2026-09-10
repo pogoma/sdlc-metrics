@@ -1,0 +1,64 @@
+{
+  "schema_version": 2,
+  "uid": "83b20bca16b64931bd68ba136afeb69a",
+  "protocol": "A-B",
+  "name": "protokol-a-b",
+  "project": "agent-skills",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "description": "Pomiar sprzed ustalenia wzorca; opis przebiegu nie istnieje.",
+  "interactions": 0,
+  "corrections": [],
+  "measurements": {
+    "plan_questions": {
+      "definition": "liczba pytań przedstawionych właścicielowi w Protokole A",
+      "value": 5
+    },
+    "review_corrections": {
+      "definition": "liczba odpowiedzi poprawki w pętli przeglądu Protokołu B",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "liczba próśb o przegląd przedstawionych właścicielowi w Protokole B",
+      "value": 1
+    }
+  },
+  "migration_gaps": [
+    {
+      "field": "agent",
+      "from_version": 0,
+      "reason": "wersja 0 nie zapisywała agenta ani sesji"
+    },
+    {
+      "field": "description",
+      "from_version": 0,
+      "reason": "wersja 0 nie zapisywała opisu przebiegu"
+    },
+    {
+      "field": "interactions",
+      "from_version": 0,
+      "reason": "wersja 0 nie liczyła wymian z człowiekiem; wpisano 0, a nie zmierzono"
+    },
+    {
+      "field": "corrections",
+      "from_version": 0,
+      "reason": "wersja 0 nie zapisywała poprawek; lista jest pusta, a nie pusta z pomiaru"
+    },
+    {
+      "field": "finished",
+      "from_version": 0,
+      "reason": "wersja 0 nie zapisywała czasu; znacznik wzięty z nazwy pliku źródłowego"
+    },
+    {
+      "field": "uid",
+      "from_version": 1,
+      "reason": "wersja 1 nie miała identyfikatora wywołania; nadany przy migracji"
+    }
+  ],
+  "finished": "20260823T134744Z",
+  "run_id": "f1402fd"
+}

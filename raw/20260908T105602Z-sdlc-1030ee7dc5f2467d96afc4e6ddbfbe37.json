@@ -1,0 +1,59 @@
+{
+  "schema_version": 2,
+  "uid": "1030ee7dc5f2467d96afc4e6ddbfbe37",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "description": "wskazanie produktu rolą w .gitmodules i warunkowy wymóg gałęzi",
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 2
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 0
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 0
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 11
+    }
+  },
+  "migration_gaps": [
+    {
+      "field": "uid",
+      "from_version": 1,
+      "reason": "wersja 1 nie miała identyfikatora wywołania; nadany przy migracji"
+    }
+  ],
+  "started": "20260908T104312Z",
+  "finished": "20260908T105602Z"
+}

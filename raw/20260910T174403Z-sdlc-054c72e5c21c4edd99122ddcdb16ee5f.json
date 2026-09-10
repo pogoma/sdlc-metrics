@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "uid": "054c72e5c21c4edd99122ddcdb16ee5f",
+  "protocol": "E",
+  "name": "migracja pomiarów",
+  "project": "sdlc",
+  "description": "Migracja 47 pomiarów na wersję 2; oddanie zmiany prowadzi przebieg nadrzędny Protokołu B.",
+  "migration_gaps": [],
+  "started": "20260910T174143Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_018cXJt4aM245Fi5hs6FNL5N"
+    ]
+  },
+  "interactions": 0,
+  "corrections": [],
+  "measurements": {
+    "files_damaged": {
+      "definition": "pliki, które trafiły do katalogu plików uszkodzonych",
+      "value": 0
+    },
+    "files_migrated": {
+      "definition": "pomiary przeniesione na nowszą wersję",
+      "value": 47
+    },
+    "files_repaired": {
+      "definition": "pliki uszkodzone doprowadzone do zgodności",
+      "value": 0
+    },
+    "gaps_recorded": {
+      "definition": "braki odnotowane w polu migration_gaps",
+      "value": 82
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    },
+    "versions_crossed": {
+      "definition": "przejścia między wersjami wykonane łącznie",
+      "value": 54
+    }
+  },
+  "finished": "20260910T174403Z"
+}
