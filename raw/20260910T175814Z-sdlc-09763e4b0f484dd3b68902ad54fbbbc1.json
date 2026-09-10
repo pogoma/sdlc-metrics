@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "uid": "09763e4b0f484dd3b68902ad54fbbbc1",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Podbicie wskaźnika procesu na scaloną rewizję gałęzi głównej, przed scaleniem repozytorium developerskiego.",
+  "migration_gaps": [],
+  "started": "20260910T175719Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_018cXJt4aM245Fi5hs6FNL5N"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 1
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    }
+  },
+  "finished": "20260910T175814Z"
+}
