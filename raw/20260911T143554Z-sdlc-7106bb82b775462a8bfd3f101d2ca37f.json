@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "uid": "7106bb82b775462a8bfd3f101d2ca37f",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Tag wydania adnotowany opisem wydania w release.py.",
+  "migration_gaps": [],
+  "started": "20260911T143247Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01KaA6tjiRyJpDvM6qkehKPL"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 4
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    }
+  },
+  "finished": "20260911T143554Z"
+}
