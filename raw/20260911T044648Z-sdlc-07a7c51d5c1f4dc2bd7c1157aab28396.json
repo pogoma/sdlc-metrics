@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "uid": "07a7c51d5c1f4dc2bd7c1157aab28396",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "description": "oskryptowanie operacji git i gh w protokołach procesu",
+  "migration_gaps": [],
+  "started": "20260910T185306Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01XhqbTZypfnvbS1m5vaVETT"
+    ]
+  },
+  "interactions": 8,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 2
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 5
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 2
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 0
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 12
+    }
+  },
+  "finished": "20260911T044648Z"
+}
