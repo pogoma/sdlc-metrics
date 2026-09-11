@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "uid": "b84046a960f24212912781a71d0d0273",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Dodanie brakującej deklaracji gałęzi main produktu w .gitmodules.",
+  "migration_gaps": [],
+  "started": "20260911T101122Z",
+  "agent": {
+    "name": "Codex",
+    "sessions": [
+      "session_01XhqbTZypfnvbS1m5vaVETT"
+    ]
+  },
+  "interactions": 0,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 1
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    }
+  },
+  "finished": "20260911T101627Z"
+}
