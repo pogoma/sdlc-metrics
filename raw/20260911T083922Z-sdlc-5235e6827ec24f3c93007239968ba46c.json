@@ -1,0 +1,42 @@
+{
+  "schema_version": 2,
+  "uid": "5235e6827ec24f3c93007239968ba46c",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Naprawa niezależności testów submodułów od globalnej tożsamości Git.",
+  "migration_gaps": [],
+  "started": "20260911T081948Z",
+  "agent": {
+    "name": "Codex",
+    "sessions": [
+      "session_01XhqbTZypfnvbS1m5vaVETT"
+    ]
+  },
+  "interactions": 0,
+  "corrections": [
+    {
+      "kind": "narzedzie",
+      "description": "Pierwsza próba zapisu kroku 9 nie miała tożsamości autora przez izolację konfiguracji Git podczas odtwarzania CI."
+    }
+  ],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 1
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    }
+  },
+  "finished": "20260911T083922Z"
+}
