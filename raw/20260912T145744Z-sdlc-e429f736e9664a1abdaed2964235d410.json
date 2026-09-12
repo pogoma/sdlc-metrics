@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "e429f736e9664a1abdaed2964235d410",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Wpisy inboxa po przebiegu Protokołu G: brak refresh w Protokole B i niewykonalna kontrola pierwszego kroku",
+  "migration_gaps": [],
+  "started": "20260912T144919Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 3
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260912T145744Z"
+}
