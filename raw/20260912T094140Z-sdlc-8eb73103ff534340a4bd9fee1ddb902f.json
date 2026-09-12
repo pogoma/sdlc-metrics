@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "8eb73103ff534340a4bd9fee1ddb902f",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Etap scalenia bierze wszystkie repozytoria i scala produkt przed repozytorium developerskim.",
+  "migration_gaps": [],
+  "started": "20260912T093748Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_013RTCrqo9rXTMUKBtQnkHnJ"
+    ]
+  },
+  "interactions": 15,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 1
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 3
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260912T094140Z"
+}
