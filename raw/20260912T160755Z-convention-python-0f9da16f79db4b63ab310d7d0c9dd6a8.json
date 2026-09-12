@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "uid": "0f9da16f79db4b63ab310d7d0c9dd6a8",
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "convention-python",
+  "description": "biblioteka obsługi YAML w konwencji Pythona, na potrzeby skryptów procesu",
+  "migration_gaps": [],
+  "started": "20260912T144435Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 3,
+  "corrections": [],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 2
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 3
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 1
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 0
+    }
+  },
+  "finished": "20260912T160755Z"
+}
