@@ -1,0 +1,69 @@
+{
+  "schema_version": 2,
+  "uid": "b93e3a8d36454832bc1f838e85021506",
+  "protocol": "Z",
+  "name": "wydanie i migracja wersji procesu",
+  "project": "sdlc",
+  "description": "Wydanie procesu v6.0.0 i ustalenie skutków migracji",
+  "migration_gaps": [],
+  "started": "20260912T101559Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "decisions_added": {
+      "definition": "decyzje, które doszły w zasobie",
+      "value": 5
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 1
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "decisions_renumbered": {
+      "definition": "decyzje, które zmieniły identyfikator albo właściciela",
+      "value": 0
+    },
+    "documents_adapted": {
+      "definition": "dokumenty projektu zmienione przez migrację",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_conflicts": {
+      "definition": "kolizje reguły zasobu z decyzją projektu",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "protocols_adapted": {
+      "definition": "protokoły projektu zmienione przez migrację",
+      "value": 0
+    },
+    "protocols_added": {
+      "definition": "protokoły dodane, bo doszły w procesie",
+      "value": 0
+    },
+    "protocols_removed": {
+      "definition": "protokoły usunięte, bo zniknęły w procesie",
+      "value": 0
+    },
+    "references_fixed": {
+      "definition": "poprawione odwołania do decyzji i do plików",
+      "value": 0
+    }
+  },
+  "finished": "20260912T102249Z"
+}
