@@ -1,0 +1,53 @@
+{
+  "schema_version": 2,
+  "uid": "b84b0e17faf34b59bef6fa4509703a88",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "description": "Realizacja projektu: jeden skrypt na protokół prowadzi cały przebieg.",
+  "migration_gaps": [],
+  "started": "20260912T074724Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_013RTCrqo9rXTMUKBtQnkHnJ"
+    ]
+  },
+  "interactions": 14,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 9
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 1
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 2
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 22
+    }
+  },
+  "finished": "20260912T090753Z"
+}
