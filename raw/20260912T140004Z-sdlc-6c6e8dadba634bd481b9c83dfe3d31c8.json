@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "uid": "6c6e8dadba634bd481b9c83dfe3d31c8",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "description": "Realizacja zatwierdzonego projektu researchu agentowych SDLC",
+  "migration_gaps": [],
+  "started": "20260912T124757Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 4,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 3
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 1
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 1
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 1
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 1
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 4
+    }
+  },
+  "finished": "20260912T140004Z"
+}
