@@ -1,0 +1,65 @@
+{
+  "schema_version": 2,
+  "uid": "f0a256cf6ddb46f28b0c6699d4300bdd",
+  "protocol": "G",
+  "name": "research agentowych SDLC",
+  "project": "sdlc",
+  "description": "Pierwszy przebieg researchu agentowych SDLC: katalog startowy, 15 pozycji.",
+  "migration_gaps": [],
+  "started": "20260912T173640Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_015j9xSzGvc28aZ8XzTEj3XY"
+    ]
+  },
+  "interactions": 11,
+  "corrections": [],
+  "measurements": {
+    "catalog_added": {
+      "definition": "pozycje dopisane do katalogu w tym przebiegu",
+      "value": 0
+    },
+    "catalog_entries": {
+      "definition": "pozycje katalogu wzięte do tego przebiegu",
+      "value": 15
+    },
+    "catalog_rejected": {
+      "definition": "kandydaci odrzuceni na kryterium kwalifikacji",
+      "value": 0
+    },
+    "differences_found": {
+      "definition": "różnice wobec procesu rozwijanego tutaj",
+      "value": 45
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "maturity_unknown": {
+      "definition": "oceny dojrzałości oznaczone brakiem danych",
+      "value": 9
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 5
+    },
+    "recommendations": {
+      "definition": "rekomendacje zapisane w materiale badawczym",
+      "value": 8
+    },
+    "recommendations_accepted": {
+      "definition": "rekomendacje, które właściciel przyjął do planowania zmiany",
+      "value": 2
+    },
+    "sources_confirmed": {
+      "definition": "pozycje z potwierdzonym źródłem autora i datą sprawdzenia",
+      "value": 15
+    },
+    "stages_unreported": {
+      "definition": "etapy zapisane jako nieopisane, zliczone po wszystkich pozycjach",
+      "value": 18
+    }
+  },
+  "finished": "20260913T070155Z"
+}
