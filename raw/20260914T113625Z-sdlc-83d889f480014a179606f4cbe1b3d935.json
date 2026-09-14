@@ -1,0 +1,46 @@
+{
+  "schema_version": 2,
+  "uid": "83d889f480014a179606f4cbe1b3d935",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Naprawa czterech usterek mechaniki: versions --to, plan --after bez --add, plan --edit z __depends__, cichy push po przepisaniu gałęzi.",
+  "migration_gaps": [],
+  "started": "20260914T112939Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_017yTkWjvYhbAThbwmun24ee"
+    ]
+  },
+  "interactions": 3,
+  "corrections": [
+    {
+      "kind": "proces",
+      "description": "Protokół C na niescalonej gałęzi realizacji, choć poprawki versions --to i plan --edit zmieniają zachowanie mechaniki; odstępstwo zatwierdzone przez właściciela."
+    }
+  ],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 7
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 2
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260914T113625Z"
+}
