@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "uid": "90228ff9d5814d7eb7d5215c3affb6de",
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "description": "Dekompozycja check.py i protocol.py na moduły w libs, czas każdej weryfikacji i równoległe uruchamianie.",
+  "migration_gaps": [],
+  "started": "20260914T065456Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_017yTkWjvYhbAThbwmun24ee"
+    ]
+  },
+  "interactions": 5,
+  "corrections": [],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 3
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 4
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 2
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 1
+    }
+  },
+  "finished": "20260914T090334Z"
+}
