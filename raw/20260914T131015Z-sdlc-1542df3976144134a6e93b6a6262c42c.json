@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "uid": "1542df3976144134a6e93b6a6262c42c",
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "description": "Etap commit sam wyrównuje submoduł metryk z wyprzedzoną gałęzią zdalną przed pushem.",
+  "migration_gaps": [],
+  "started": "20260914T125348Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_017yTkWjvYhbAThbwmun24ee"
+    ]
+  },
+  "interactions": 4,
+  "corrections": [],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 3
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 4
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 1
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 0
+    }
+  },
+  "finished": "20260914T131015Z"
+}
