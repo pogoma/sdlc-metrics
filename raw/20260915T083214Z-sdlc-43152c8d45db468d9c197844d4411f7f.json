@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "uid": "43152c8d45db468d9c197844d4411f7f",
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "description": "Przeniesienie Protokołu 7 z procesu do prywatnego Protokołu X repozytorium sdlc-devel",
+  "migration_gaps": [],
+  "started": "20260915T080337Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 6,
+  "corrections": [],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 2
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 4
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 3
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 2
+    }
+  },
+  "finished": "20260915T083214Z"
+}
