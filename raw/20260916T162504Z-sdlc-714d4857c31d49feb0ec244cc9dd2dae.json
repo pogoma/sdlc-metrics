@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "714d4857c31d49feb0ec244cc9dd2dae",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Sprawdzenie deskryptora przebiegu (przebieg zatrzymany)",
+  "migration_gaps": [],
+  "started": "20260916T162434Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 1
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260916T162504Z"
+}
