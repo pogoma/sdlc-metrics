@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "uid": "c5cce782c6404bc5aab56c087054e3d1",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "convention-python",
+  "description": "Realizacja projektu testy własnych skryptów i produktu",
+  "migration_gaps": [],
+  "started": "20260918T112228Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "37e0e123-7337-4721-917c-7149f1259654"
+    ]
+  },
+  "interactions": 4,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 2
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 1
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 0
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 5
+    }
+  },
+  "finished": "20260918T121719Z"
+}
