@@ -7,6 +7,13 @@ Runs migrate.py for each file of the directory and gives one result. The list
 of files is taken before the first migration, so measurements written by the
 migration itself are not migrated again in the same pass.
 
+The files go to a pool instead of being waited for one at a time: each one is
+a subprocess this script only waits for, and their number grows with the
+repository. The reports come back in the order of the files, never in the
+order they finished, because one run of this script is compared with the next
+(PYTHON-0007). The pool lives here rather than in a shared library, because
+this repository holds measurements and mounts no convention of its own.
+
 One file that cannot be migrated does not stop the others: the run goes to the
 end and the report says which files failed.
 
@@ -16,8 +23,10 @@ printed for the owner is Polish (SDLC-0001).
 
 import argparse
 import json
+import os
 import subprocess
 import sys
+from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Dict, List
 
@@ -73,6 +82,29 @@ def run_one(root: Path, path: Path, apply: bool) -> Dict[str, object]:
         }
 
 
+def jobs_for(count: int) -> int:
+    """How many files to migrate side by side, for that many of them.
+
+    The number of cores, because migrating one file is a subprocess doing real
+    work. Never more than there is to do, and never fewer than one.
+    """
+    if count <= 1:
+        return 1
+    return max(1, min(os.cpu_count() or 1, count))
+
+
+def run_many(root: Path, paths: List[Path], apply: bool) -> List[Dict[str, object]]:
+    """Reports of every file, in the order of the files."""
+    if not paths:
+        return []
+    workers = jobs_for(len(paths))
+    if workers == 1:
+        return [run_one(root, path, apply) for path in paths]
+    with ThreadPoolExecutor(max_workers=workers) as pool:
+        futures = [pool.submit(run_one, root, path, apply) for path in paths]
+        return [future.result() for future in futures]
+
+
 def run(root: Path, directory: str, apply: bool) -> Dict[str, object]:
     place = root / directory
     paths = measurements(place)
@@ -81,8 +113,7 @@ def run(root: Path, directory: str, apply: bool) -> Dict[str, object]:
     notices: List[Dict[str, object]] = []
     if not paths:
         notices.append(finding(directory, "nie ma pomiarów do migracji"))
-    for path in paths:
-        answer = run_one(root, path, apply)
+    for path, answer in zip(paths, run_many(root, paths, apply)):
         gates.append(answer)
         if answer.get("result") != "PASS":
             errors.append(finding(named(root, path), "migracja nie przeszła"))

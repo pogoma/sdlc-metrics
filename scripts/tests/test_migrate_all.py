@@ -2,6 +2,7 @@
 """Tests of the migration of a whole directory."""
 
 import json
+import os
 import sys
 import tempfile
 import unittest
@@ -90,6 +91,45 @@ class MigrateAllTest(unittest.TestCase):
         self.assertIn("zly.json", found["errors"][0]["subject"])
         self.assertIn("zly.json", self.raw())
         self.assertEqual(len([name for name in self.raw() if name.startswith("2026")]), 1)
+
+    def test_reports_keep_the_order_of_the_files(self) -> None:
+        """The pool answers in the order of the files, not of finishing."""
+        for day in range(1, 6):
+            self.write("sdlc-A-2026010{}T120000Z.json".format(day),
+                       dict(VERSION_ONE, finished="2026010{}T120000Z".format(day)),
+                       schema.RAW_DIRECTORY)
+        found = migrate_all.run(self.root, schema.RAW_DIRECTORY, False)
+        self.assertEqual(found["result"], "PASS")
+        self.assertEqual(len(found["gates"]), 5)
+        subjects = [gate.get("subject") or "" for gate in found["gates"]]
+        self.assertEqual(subjects, sorted(subjects))
+
+    def test_one_worker_gives_the_same_report_as_many(self) -> None:
+        """The migration gives every measurement a fresh uid, so the parts
+        compared here are the ones that must not depend on the pool."""
+        for day in range(1, 5):
+            self.write("sdlc-A-2026010{}T120000Z.json".format(day),
+                       dict(VERSION_ONE, finished="2026010{}T120000Z".format(day)),
+                       schema.RAW_DIRECTORY)
+
+        def stable(gates):
+            return [(gate.get("gate"), gate.get("result"), gate.get("subject"))
+                    for gate in gates]
+
+        many = migrate_all.run(self.root, schema.RAW_DIRECTORY, False)
+        paths = migrate_all.measurements(self.root / schema.RAW_DIRECTORY)
+        one = [migrate_all.run_one(self.root, path, False) for path in paths]
+        self.assertEqual(stable(many["gates"]), stable(one))
+
+    def test_jobs_never_exceed_the_files_to_migrate(self) -> None:
+        self.assertEqual(migrate_all.jobs_for(0), 1)
+        self.assertEqual(migrate_all.jobs_for(1), 1)
+        self.assertLessEqual(migrate_all.jobs_for(2), 2)
+        self.assertLessEqual(migrate_all.jobs_for(10000),
+                             max(1, os.cpu_count() or 1))
+
+    def test_no_files_need_no_pool(self) -> None:
+        self.assertEqual(migrate_all.run_many(self.root, [], False), [])
 
     def test_legacy_directory(self) -> None:
         self.write("agent-skills-protokol-a-b-20260820T192700Z.json",
