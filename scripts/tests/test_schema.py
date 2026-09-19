@@ -146,8 +146,120 @@ class SchemaTest(unittest.TestCase):
         for name, version in ((RAW, 1), (schema.LEGACY_DIRECTORY, 0)):
             for path in sorted((root / name).glob("*.json")):
                 document = json.loads(path.read_text(encoding="utf-8"))
-                found = schema.validate(document, schema.version_of(document, path), root)
+                found = schema.validate(document, schema.version_of(document, path), root,
+                                        schema.PROCESS_KIND)
                 self.assertEqual(found, [], "{}: {}".format(path.name, found))
+
+
+class KindTest(unittest.TestCase):
+    """Choosing the schema by the pair of kind and version (SDLC-0030)."""
+
+    def setUp(self) -> None:
+        self.place = tempfile.TemporaryDirectory()
+        self.root = Path(self.place.name)
+        self.addCleanup(self.place.cleanup)
+        for kind in (schema.PROCESS_KIND, schema.PERFORMANCE_KIND):
+            place = self.root / schema.SCHEMAS_DIRECTORY / kind
+            place.mkdir(parents=True)
+            (place / "1.json").write_text(json.dumps(SIMPLE, ensure_ascii=False),
+                                          encoding="utf-8")
+
+    def test_kinds_are_the_directories_of_schemas(self) -> None:
+        self.assertEqual(schema.kinds(self.root),
+                         [schema.PERFORMANCE_KIND, schema.PROCESS_KIND])
+
+    def test_kind_from_the_field(self) -> None:
+        self.assertEqual(
+            schema.kind_of({"kind": schema.PERFORMANCE_KIND}, None, self.root),
+            schema.PERFORMANCE_KIND)
+
+    def test_kind_from_the_directory(self) -> None:
+        path = self.root / schema.RAW_DIRECTORY / schema.PERFORMANCE_KIND / "a.json"
+        self.assertEqual(schema.kind_of({}, path, self.root), schema.PERFORMANCE_KIND)
+
+    def test_measurement_without_a_kind_is_a_protocol_run(self) -> None:
+        self.assertEqual(schema.kind_of({}, None, self.root), schema.PROCESS_KIND)
+
+    def test_unknown_kind_is_refused(self) -> None:
+        with self.assertRaises(ValueError):
+            schema.kind_of({"kind": "wymyslony"}, None, self.root)
+
+    def test_kind_field_that_is_not_a_name(self) -> None:
+        with self.assertRaises(ValueError):
+            schema.kind_of({"kind": 7}, None, self.root)
+
+    def test_each_kind_keeps_its_own_versions(self) -> None:
+        place = self.root / schema.SCHEMAS_DIRECTORY / schema.PERFORMANCE_KIND
+        (place / "2.json").write_text(json.dumps(SIMPLE, ensure_ascii=False),
+                                      encoding="utf-8")
+        self.assertEqual(schema.versions(schema.PROCESS_KIND, self.root), [1])
+        self.assertEqual(schema.versions(schema.PERFORMANCE_KIND, self.root), [1, 2])
+
+
+class PerformanceSchemaTest(unittest.TestCase):
+    """The schema of the performance measurement, as it lies in the repository."""
+
+    MEASUREMENT = {
+        "schema_version": 1,
+        "kind": schema.PERFORMANCE_KIND,
+        "uid": "0" * 32,
+        "project": "sdlc",
+        "finished": "20260919T140000Z",
+        "commands": [{
+            "file": "scripts/check.py",
+            "name": "check",
+            "arguments": [],
+            "repetitions": 2,
+            "runs": [
+                {"duration_ms": 16500.0, "outcome": "ok",
+                 "spans": [{"operation": "uruchomienie weryfikacji",
+                            "duration_ms": 1400.0,
+                            "span_id": "a" * 16, "parent_span_id": "b" * 16}]},
+                {"duration_ms": 16100.5, "outcome": "ok", "spans": []},
+            ],
+        }],
+        "environment": {"system": "Linux", "release": "7.0.0", "machine": "x86_64",
+                        "python": "3.12.0", "cpu_count": 8, "load_average": 0.4},
+        "migration_gaps": [],
+    }
+
+    def setUp(self) -> None:
+        self.root = schema.repository_root(Path(schema.__file__))
+
+    def problems(self, document: dict) -> list:
+        return schema.validate(document, 1, self.root, schema.PERFORMANCE_KIND)
+
+    def changed(self, **values) -> dict:
+        document = json.loads(json.dumps(self.MEASUREMENT))
+        document.update(values)
+        return document
+
+    def test_measurement_that_fits(self) -> None:
+        self.assertEqual(self.problems(self.MEASUREMENT), [])
+
+    def test_measurement_without_commands(self) -> None:
+        self.assertEqual(self.problems(self.changed(commands=[])),
+                         ["pomiar.commands ma mniej niż 1 elementów"])
+
+    def test_outcome_outside_the_dictionary(self) -> None:
+        document = json.loads(json.dumps(self.MEASUREMENT))
+        document["commands"][0]["runs"][0]["outcome"] = "moze"
+        self.assertTrue(any("outcome" in problem for problem in self.problems(document)))
+
+    def test_environment_without_the_machine(self) -> None:
+        environment = dict(self.MEASUREMENT["environment"])
+        del environment["cpu_count"]
+        self.assertTrue(any("cpu_count" in problem
+                            for problem in self.problems(self.changed(environment=environment))))
+
+    def test_optional_fields_of_the_environment_may_be_absent(self) -> None:
+        environment = {"system": "Linux", "release": "7.0.0", "machine": "x86_64",
+                       "python": "3.12.0", "cpu_count": 8}
+        self.assertEqual(self.problems(self.changed(environment=environment)), [])
+
+    def test_kind_of_another_measurement_is_refused(self) -> None:
+        self.assertTrue(any("kind" in problem
+                            for problem in self.problems(self.changed(kind="process"))))
 
 
 if __name__ == "__main__":
