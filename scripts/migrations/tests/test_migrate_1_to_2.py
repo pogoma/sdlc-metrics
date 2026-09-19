@@ -38,16 +38,17 @@ class MigrateOneToTwoTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.repository_root(Path(schema.__file__)))
-        target = self.root / schema.SCHEMAS_DIRECTORY
+        source = schema.directory(schema.PROCESS_KIND,
+                                  schema.repository_root(Path(schema.__file__)))
+        target = self.root / schema.SCHEMAS_DIRECTORY / schema.PROCESS_KIND
         target.mkdir(parents=True)
         for path in source.glob("*.json"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
-        (self.root / schema.RAW_DIRECTORY).mkdir()
+        (self.root / schema.RAW_DIRECTORY / schema.PROCESS_KIND).mkdir(parents=True)
 
     def write(self, name: str, document: object) -> Path:
-        path = self.root / schema.RAW_DIRECTORY / name
+        path = self.root / schema.RAW_DIRECTORY / schema.PROCESS_KIND / name
         path.write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
         return path
 
@@ -71,7 +72,7 @@ class MigrateOneToTwoTest(unittest.TestCase):
         path = self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE)
         report = self.call(path, "--apply")
         stored = json.loads((self.root / report["target"]).read_text(encoding="utf-8"))
-        self.assertEqual(report["target"], "raw/20260101T120000Z-sdlc-{}.json".format(
+        self.assertEqual(report["target"], "raw/process/20260101T120000Z-sdlc-{}.json".format(
             stored["uid"]))
 
     def test_input_disappears_and_result_fits_version_two(self) -> None:
@@ -90,7 +91,7 @@ class MigrateOneToTwoTest(unittest.TestCase):
         stored = json.loads((self.root / report["target"]).read_text(encoding="utf-8"))
         fields = [entry["field"] for entry in stored["migration_gaps"]]
         self.assertEqual(fields, ["uid", "finished"])
-        self.assertTrue(report["target"].startswith("raw/20260101T120000Z-"))
+        self.assertTrue(report["target"].startswith("raw/process/20260101T120000Z-"))
 
     def test_carried_gaps_are_stored_before_the_ones_this_step_records(self) -> None:
         carried = self.root / "gaps.json"

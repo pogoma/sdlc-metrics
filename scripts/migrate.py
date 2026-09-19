@@ -129,7 +129,8 @@ def run(root: Path, path: Path, declared: Optional[int], wanted: Optional[int],
     if version is None:
         return report(errors, notices, gates, None)
     try:
-        target = wanted if wanted is not None else schema.latest(root)
+        target = wanted if wanted is not None else schema.latest(
+            schema.PROCESS_KIND, root)
     except ValueError as error:
         return report([finding(subject, str(error))], notices, gates, None)
     if version >= target:

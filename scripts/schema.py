@@ -29,7 +29,14 @@ SCHEMAS_DIRECTORY = "schemas"
 RAW_DIRECTORY = "raw"
 LEGACY_DIRECTORY = "legacy"
 VERSION_FIELD = "schema_version"
+KIND_FIELD = "kind"
+# Measurements of protocol runs predate the kind field, so a file without it
+# is one of theirs; the directory says the same thing for the ones already
+# stored (SDLC-0030).
+PROCESS_KIND = "process"
+PERFORMANCE_KIND = "performance"
 VERSION_NAME = re.compile(r"^(\d+)\.json$")
+KIND_NAME = re.compile(r"^[a-z][a-z0-9-]*$")
 REFERENCE_PREFIX = "#/$defs/"
 
 # Keywords the checker applies. Everything outside both sets is a problem.
@@ -55,16 +62,37 @@ def repository_root(module: Path) -> Path:
     return module.resolve().parents[1]
 
 
-def directory(root: Optional[Path] = None) -> Path:
-    """Directory holding one schema file per version."""
+def schemas_root(root: Optional[Path] = None) -> Path:
+    """Directory holding one directory per kind of measurement."""
     base = root if root is not None else repository_root(Path(__file__))
     return base / SCHEMAS_DIRECTORY
 
 
-def versions(root: Optional[Path] = None) -> List[int]:
-    """Versions that have a schema, in ascending order."""
+def directory(kind: str = PROCESS_KIND, root: Optional[Path] = None) -> Path:
+    """Directory holding one schema file per version of one kind."""
+    return schemas_root(root) / kind
+
+
+def kinds(root: Optional[Path] = None) -> List[str]:
+    """Kinds that have a directory of schemas, in alphabetical order."""
+    place = schemas_root(root)
+    if not place.is_dir():
+        return []
+    return sorted(path.name for path in place.iterdir()
+                  if path.is_dir() and KIND_NAME.match(path.name))
+
+
+def measurements_directory(kind: str = PROCESS_KIND,
+                           root: Optional[Path] = None) -> Path:
+    """Directory holding the stored measurements of one kind."""
+    base = root if root is not None else repository_root(Path(__file__))
+    return base / RAW_DIRECTORY / kind
+
+
+def versions(kind: str = PROCESS_KIND, root: Optional[Path] = None) -> List[int]:
+    """Versions of one kind that have a schema, in ascending order."""
     found = []
-    place = directory(root)
+    place = directory(kind, root)
     if not place.is_dir():
         return found
     for path in sorted(place.iterdir()):
@@ -74,22 +102,25 @@ def versions(root: Optional[Path] = None) -> List[int]:
     return sorted(found)
 
 
-def latest(root: Optional[Path] = None) -> int:
-    """Newest version that has a schema."""
-    found = versions(root)
+def latest(kind: str = PROCESS_KIND, root: Optional[Path] = None) -> int:
+    """Newest version of one kind that has a schema."""
+    found = versions(kind, root)
     if not found:
-        raise ValueError("brak katalogu schematów albo żadnego schematu wersji")
+        raise ValueError(
+            "rodzaj {}: brak katalogu schematów albo żadnego schematu wersji".format(kind))
     return found[-1]
 
 
-def load(version: int, root: Optional[Path] = None) -> Dict[str, object]:
-    """Schema of one version, as a document."""
-    path = directory(root) / "{}.json".format(version)
+def load(kind: str, version: int,
+         root: Optional[Path] = None) -> Dict[str, object]:
+    """Schema of one kind and version, as a document."""
+    path = directory(kind, root) / "{}.json".format(version)
     if not path.is_file():
-        raise ValueError("brak schematu wersji {}".format(version))
+        raise ValueError("brak schematu rodzaju {} w wersji {}".format(kind, version))
     document = json.loads(path.read_text(encoding="utf-8"))
     if not isinstance(document, dict):
-        raise ValueError("schemat wersji {} nie jest obiektem".format(version))
+        raise ValueError("schemat rodzaju {} w wersji {} nie jest obiektem".format(
+            kind, version))
     return document
 
 
@@ -109,10 +140,47 @@ def version_of(document: object, path: Optional[Path] = None) -> int:
     return 1
 
 
-def validate(document: object, version: int,
-             root: Optional[Path] = None) -> List[str]:
+def kind_of(document: object, path: Optional[Path] = None,
+            root: Optional[Path] = None) -> str:
+    """Kind a measurement declares, or the one its directory implies.
+
+    Measurements of protocol runs predate the field, so a file without it is
+    one of theirs; a file stored under raw/<kind>/ says the same thing through
+    its directory (SDLC-0030). A declared kind without a directory of schemas
+    is a refusal, not a silent pass.
+    """
+    declared = None
+    if isinstance(document, dict) and KIND_FIELD in document:
+        value = document[KIND_FIELD]
+        if not isinstance(value, str) or not KIND_NAME.match(value):
+            raise ValueError("{} nie jest nazwą rodzaju".format(KIND_FIELD))
+        declared = value
+    if declared is None:
+        declared = directory_kind(path) or PROCESS_KIND
+    known = kinds(root)
+    if known and declared not in known:
+        raise ValueError("nieznany rodzaj pomiaru {}".format(declared))
+    return declared
+
+
+def directory_kind(path: Optional[Path]) -> Optional[str]:
+    """Kind read from the raw/<kind>/ directory a measurement lies in."""
+    if path is None:
+        return None
+    parts = path.resolve().parts
+    if RAW_DIRECTORY not in parts:
+        return None
+    place = parts.index(RAW_DIRECTORY)
+    if place + 2 >= len(parts):
+        return None
+    name = parts[place + 1]
+    return name if KIND_NAME.match(name) else None
+
+
+def validate(document: object, version: int, root: Optional[Path] = None,
+             kind: str = PROCESS_KIND) -> List[str]:
     """Everything wrong with one measurement, as a list of Polish sentences."""
-    schema = load(version, root)
+    schema = load(kind, version, root)
     return check(document, schema, schema, "pomiar")
 
 

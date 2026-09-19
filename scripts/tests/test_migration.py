@@ -12,6 +12,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import migration
 import schema
 
+# Schemas and measurements live in the directory of their kind (SDLC-0030).
+SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
+RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+
 VERSION_ONE = {
     "protocol": "A",
     "name": "planowanie zmiany",
@@ -43,8 +47,9 @@ class MigrationTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.repository_root(Path(schema.__file__)))
-        target = self.root / schema.SCHEMAS_DIRECTORY
+        source = schema.directory(schema.PROCESS_KIND,
+                                 schema.repository_root(Path(schema.__file__)))
+        target = self.root / SCHEMAS
         target.mkdir(parents=True)
         for path in source.glob("*.json"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
@@ -53,7 +58,7 @@ class MigrationTest(unittest.TestCase):
         migration.new_uid = lambda: "a" * 32
         self.addCleanup(setattr, migration, "new_uid", self.uid)
 
-    def write(self, name, document, directory=schema.RAW_DIRECTORY):
+    def write(self, name, document, directory=RAW):
         place = self.root / directory
         place.mkdir(parents=True, exist_ok=True)
         path = place / name
@@ -143,7 +148,7 @@ class MigrationTest(unittest.TestCase):
         self.assertIn("pomiar nie jest obiektem", report.errors[0]["message"])
 
     def test_file_that_cannot_be_read(self) -> None:
-        report = self.step(self.root / schema.RAW_DIRECTORY / "brak.json")
+        report = self.step(self.root / RAW / "brak.json")
         self.assertEqual(report.as_document()["result"], "FAIL")
         self.assertIn("nie udało się odczytać", report.errors[0]["message"])
 

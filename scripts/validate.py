@@ -2,11 +2,12 @@
 # python-file: script
 """Gate over stored measurements (SDLC-0013).
 
-Checks each measurement against the schema of the version it declares, not
-against the newest one: a project working on an older version of the process
-still writes correct measurements, and migrating them is a separate decision.
+Checks each measurement against the schema of the kind and version it declares,
+not against the newest one: a project working on an older version of the
+process still writes correct measurements, and migrating them is a separate
+decision. A measurement of an unknown kind is a refusal, not a file left out.
 
-    ./scripts/validate.py                 # every file of raw/
+    ./scripts/validate.py                 # every file of raw/<kind>/
     ./scripts/validate.py <path>…         # the files named
 
 Prints one JSON report and repeats the result in the exit code: 0 for PASS,
@@ -35,14 +36,17 @@ def repository_root(script: Path) -> Path:
 
 
 def measurements(root: Path, arguments: List[str]) -> List[Path]:
-    """Files to check: the ones named, or the whole raw directory."""
+    """Files to check: the ones named, or every kind of the raw directory."""
     if arguments:
         return [Path(argument) for argument in arguments]
     place = root / schema.RAW_DIRECTORY
     if not place.is_dir():
         return []
-    return sorted(path for path in place.iterdir()
-                  if path.is_file() and not path.name.startswith("."))
+    found = []
+    for kind in sorted(path for path in place.iterdir() if path.is_dir()):
+        found.extend(path for path in sorted(kind.iterdir())
+                     if path.is_file() and not path.name.startswith("."))
+    return found
 
 
 def named(root: Path, path: Path) -> str:
@@ -73,10 +77,14 @@ def check_file(root: Path, path: Path) -> List[Dict[str, object]]:
     except ValueError as error:
         return [finding(subject, str(error))]
     try:
-        problems = schema.validate(document, version, root)
+        kind = schema.kind_of(document, path, root)
     except ValueError as error:
         return [finding(subject, str(error))]
-    return [finding(subject, "wersja {}: {}".format(version, problem))
+    try:
+        problems = schema.validate(document, version, root, kind)
+    except ValueError as error:
+        return [finding(subject, str(error))]
+    return [finding(subject, "rodzaj {}, wersja {}: {}".format(kind, version, problem))
             for problem in problems]
 
 

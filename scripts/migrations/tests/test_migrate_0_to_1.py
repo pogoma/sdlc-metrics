@@ -30,13 +30,14 @@ class MigrateZeroToOneTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.repository_root(Path(schema.__file__)))
-        target = self.root / schema.SCHEMAS_DIRECTORY
+        source = schema.directory(schema.PROCESS_KIND,
+                                  schema.repository_root(Path(schema.__file__)))
+        target = self.root / schema.SCHEMAS_DIRECTORY / schema.PROCESS_KIND
         target.mkdir(parents=True)
         for path in source.glob("*.json"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
-        (self.root / schema.RAW_DIRECTORY).mkdir()
+        (self.root / schema.RAW_DIRECTORY / schema.PROCESS_KIND).mkdir(parents=True)
         (self.root / schema.LEGACY_DIRECTORY).mkdir()
 
     def write(self, name: str, document: object) -> Path:
@@ -69,7 +70,7 @@ class MigrateZeroToOneTest(unittest.TestCase):
         path = self.write("agent-skills-protokol-a-b-20260820T192700Z.json", VERSION_ZERO)
         report = self.call(path, "--apply")
         self.assertEqual(report["target"],
-                         "raw/agent-skills-A-B-20260820T192700Z.json")
+                         "raw/process/agent-skills-A-B-20260820T192700Z.json")
 
     def test_stamp_comes_from_the_file_name(self) -> None:
         path = self.write("agent-skills-protokol-a-b-20260820T192700Z.json", VERSION_ZERO)

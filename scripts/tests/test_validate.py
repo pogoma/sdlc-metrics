@@ -12,6 +12,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import schema
 import validate
 
+# Schemas and measurements live in the directory of their kind (SDLC-0030).
+SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
+RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+
 MEASUREMENT = {
     "protocol": "A",
     "name": "planowanie zmiany",
@@ -29,16 +33,17 @@ class ValidateTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.repository_root(Path(schema.__file__)))
-        target = self.root / schema.SCHEMAS_DIRECTORY
+        source = schema.directory(schema.PROCESS_KIND,
+                                 schema.repository_root(Path(schema.__file__)))
+        target = self.root / SCHEMAS
         target.mkdir(parents=True)
         for path in source.glob("*.json"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
-        (self.root / schema.RAW_DIRECTORY).mkdir()
+        (self.root / RAW).mkdir(parents=True)
 
     def write(self, name: str, document: object,
-              directory: str = schema.RAW_DIRECTORY) -> Path:
+              directory: str = RAW) -> Path:
         place = self.root / directory
         place.mkdir(parents=True, exist_ok=True)
         path = place / name
@@ -61,13 +66,13 @@ class ValidateTest(unittest.TestCase):
         found = self.run_gate()
         self.assertEqual(found["result"], "FAIL")
         self.assertIn("brak pola interactions", found["errors"][0]["message"])
-        self.assertEqual(found["errors"][0]["subject"], "raw/a.json")
+        self.assertEqual(found["errors"][0]["subject"], "raw/process/a.json")
 
     def test_version_without_a_schema(self) -> None:
         self.write("a.json", dict(MEASUREMENT, schema_version=9))
         found = self.run_gate()
         self.assertEqual(found["result"], "FAIL")
-        self.assertEqual(found["errors"][0]["message"], "brak schematu wersji 9")
+        self.assertEqual(found["errors"][0]["message"], "brak schematu rodzaju process w wersji 9")
 
     def test_version_field_that_is_not_an_integer(self) -> None:
         self.write("a.json", dict(MEASUREMENT, schema_version="2"))

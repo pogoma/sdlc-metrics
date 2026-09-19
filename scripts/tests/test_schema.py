@@ -11,9 +11,13 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import schema
 
+# Schemas and measurements live in the directory of their kind (SDLC-0030).
+SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
+RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+
 
 def write(root: Path, version: int, document: dict) -> None:
-    place = root / schema.SCHEMAS_DIRECTORY
+    place = root / SCHEMAS
     place.mkdir(parents=True, exist_ok=True)
     (place / "{}.json".format(version)).write_text(
         json.dumps(document, ensure_ascii=False), encoding="utf-8")
@@ -43,7 +47,7 @@ class SchemaTest(unittest.TestCase):
         self.addCleanup(self.place.cleanup)
 
     def problems(self, document: object, version: int = 1) -> list:
-        return schema.validate(document, version, self.root)
+        return schema.validate(document, version, self.root, schema.PROCESS_KIND)
 
     def test_document_that_fits_has_no_problems(self) -> None:
         self.assertEqual(self.problems({"name": "abc", "count": 3}), [])
@@ -113,8 +117,8 @@ class SchemaTest(unittest.TestCase):
 
     def test_versions_and_latest(self) -> None:
         write(self.root, 2, SIMPLE)
-        self.assertEqual(schema.versions(self.root), [1, 2])
-        self.assertEqual(schema.latest(self.root), 2)
+        self.assertEqual(schema.versions(schema.PROCESS_KIND, self.root), [1, 2])
+        self.assertEqual(schema.latest(schema.PROCESS_KIND, self.root), 2)
 
     def test_latest_without_any_schema(self) -> None:
         with tempfile.TemporaryDirectory() as empty:
@@ -125,7 +129,7 @@ class SchemaTest(unittest.TestCase):
         self.assertEqual(schema.version_of({"schema_version": 2}), 2)
 
     def test_version_from_the_directory(self) -> None:
-        raw = self.root / schema.RAW_DIRECTORY / "a.json"
+        raw = self.root / RAW / "a.json"
         legacy = self.root / schema.LEGACY_DIRECTORY / "a.json"
         self.assertEqual(schema.version_of({}, raw), 1)
         self.assertEqual(schema.version_of({}, legacy), 0)
@@ -139,7 +143,7 @@ class SchemaTest(unittest.TestCase):
 
     def test_stored_schemas_accept_the_measurements_in_the_repository(self) -> None:
         root = schema.repository_root(Path(schema.__file__))
-        for name, version in ((schema.RAW_DIRECTORY, 1), (schema.LEGACY_DIRECTORY, 0)):
+        for name, version in ((RAW, 1), (schema.LEGACY_DIRECTORY, 0)):
             for path in sorted((root / name).glob("*.json")):
                 document = json.loads(path.read_text(encoding="utf-8"))
                 found = schema.validate(document, schema.version_of(document, path), root)

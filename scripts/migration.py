@@ -136,7 +136,7 @@ def migrate(root: Path, path: Path, source: int, target: int, transform: Transfo
         return report
     if not correct_version(document, path, source, subject, report):
         return report
-    problems = schema.validate(document, source, root)
+    problems = schema.validate(document, source, root, schema.PROCESS_KIND)
     if problems:
         for problem in problems:
             report.fail(subject, "wersja {}: {}".format(source, problem))
@@ -146,12 +146,12 @@ def migrate(root: Path, path: Path, source: int, target: int, transform: Transfo
     gaps = list(carried)
     result = transform(document, gaps, path)
     report.gaps = gaps
-    place = root / schema.RAW_DIRECTORY / name(result, path)
+    place = schema.measurements_directory(schema.PROCESS_KIND, root) / name(result, path)
     if place.exists():
         report.fail(subject, "{}: plik o tej nazwie już istnieje".format(
             named(root, place)))
         return report
-    problems = schema.validate(result, target, root)
+    problems = schema.validate(result, target, root, schema.PROCESS_KIND)
     if problems:
         store_damaged(root, path, place.name, result, problems, subject, report, apply)
         return report

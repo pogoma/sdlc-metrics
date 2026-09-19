@@ -12,6 +12,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import migrate
 import schema
 
+# Schemas and measurements live in the directory of their kind (SDLC-0030).
+SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
+RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+
 VERSION_ZERO = {
     "project": "agent-skills",
     "process": "protokol-a-b",
@@ -37,13 +41,14 @@ class MigrateTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.repository_root(Path(schema.__file__)))
-        self.schemas = self.root / schema.SCHEMAS_DIRECTORY
+        source = schema.directory(schema.PROCESS_KIND,
+                                 schema.repository_root(Path(schema.__file__)))
+        self.schemas = self.root / SCHEMAS
         self.schemas.mkdir(parents=True)
         for path in source.glob("*.json"):
             (self.schemas / path.name).write_text(path.read_text(encoding="utf-8"),
                                                   encoding="utf-8")
-        (self.root / schema.RAW_DIRECTORY).mkdir()
+        (self.root / RAW).mkdir(parents=True)
         (self.root / schema.LEGACY_DIRECTORY).mkdir()
 
     def write(self, name: str, document: object, directory: str) -> Path:
@@ -63,7 +68,7 @@ class MigrateTest(unittest.TestCase):
         self.assertEqual(len(found["gates"]), 2)
         self.assertFalse(path.exists())
         stored = json.loads((self.root / found["target"]).read_text(encoding="utf-8"))
-        self.assertEqual(schema.validate(stored, 2, self.root), [])
+        self.assertEqual(schema.validate(stored, 2, self.root, schema.PROCESS_KIND), [])
 
     def test_gaps_of_the_first_step_land_in_the_stored_file(self) -> None:
         path = self.write("agent-skills-protokol-a-b-20260820T192700Z.json",
@@ -76,7 +81,7 @@ class MigrateTest(unittest.TestCase):
 
     def test_measurement_already_in_the_newest_version_is_left_alone(self) -> None:
         document = dict(VERSION_ONE, schema_version=2, uid="a" * 32, migration_gaps=[])
-        path = self.write("a.json", document, schema.RAW_DIRECTORY)
+        path = self.write("a.json", document, RAW)
         found = self.chain(path)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(found["gates"], [])
@@ -84,7 +89,7 @@ class MigrateTest(unittest.TestCase):
         self.assertIn("jest już w wersji 2", found["notices"][0]["message"])
 
     def test_declared_version_that_does_not_match_the_content(self) -> None:
-        path = self.write("a.json", VERSION_ONE, schema.RAW_DIRECTORY)
+        path = self.write("a.json", VERSION_ONE, RAW)
         found = self.chain(path, source=0)
         self.assertEqual(found["result"], "FAIL")
         self.assertIn("podano wersję 0", found["errors"][0]["message"])
@@ -103,7 +108,7 @@ class MigrateTest(unittest.TestCase):
         (self.schemas / "3.json").write_text(
             (self.schemas / "2.json").read_text(encoding="utf-8"), encoding="utf-8")
         document = dict(VERSION_ONE, schema_version=2, uid="a" * 32, migration_gaps=[])
-        path = self.write("a.json", document, schema.RAW_DIRECTORY)
+        path = self.write("a.json", document, RAW)
         found = self.chain(path)
         self.assertEqual(found["result"], "FAIL")
         self.assertIn("brak skryptu migracji z wersji 2 do 3",
@@ -127,12 +132,12 @@ class MigrateTest(unittest.TestCase):
         self.assertIn("bez --apply", found["notices"][0]["message"])
 
     def test_file_that_does_not_exist(self) -> None:
-        found = self.chain(self.root / schema.RAW_DIRECTORY / "brak.json")
+        found = self.chain(self.root / RAW / "brak.json")
         self.assertEqual(found["result"], "FAIL")
         self.assertEqual(found["errors"][0]["message"], "nie ma takiego pliku")
 
     def test_file_that_is_not_json(self) -> None:
-        path = self.root / schema.RAW_DIRECTORY / "a.json"
+        path = self.root / RAW / "a.json"
         path.write_text("{", encoding="utf-8")
         found = self.chain(path)
         self.assertEqual(found["result"], "FAIL")
@@ -140,7 +145,7 @@ class MigrateTest(unittest.TestCase):
 
     def test_version_field_that_is_not_an_integer(self) -> None:
         path = self.write("a.json", dict(VERSION_ONE, schema_version="2"),
-                          schema.RAW_DIRECTORY)
+                          RAW)
         found = self.chain(path)
         self.assertEqual(found["result"], "FAIL")
         self.assertIn("schema_version", found["errors"][0]["message"])

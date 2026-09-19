@@ -13,6 +13,10 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 import migrate_all
 import schema
 
+# Schemas and measurements live in the directory of their kind (SDLC-0030).
+SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
+RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+
 VERSION_ZERO = {
     "project": "agent-skills",
     "process": "protokol-a-b",
@@ -38,13 +42,14 @@ class MigrateAllTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.repository_root(Path(schema.__file__)))
-        target = self.root / schema.SCHEMAS_DIRECTORY
+        source = schema.directory(schema.PROCESS_KIND,
+                                 schema.repository_root(Path(schema.__file__)))
+        target = self.root / SCHEMAS
         target.mkdir(parents=True)
         for path in source.glob("*.json"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
-        (self.root / schema.RAW_DIRECTORY).mkdir()
+        (self.root / RAW).mkdir(parents=True)
         (self.root / schema.LEGACY_DIRECTORY).mkdir()
 
     def write(self, name: str, document: object, directory: str) -> Path:
@@ -53,39 +58,39 @@ class MigrateAllTest(unittest.TestCase):
         return path
 
     def raw(self) -> list:
-        return sorted(path.name for path in (self.root / schema.RAW_DIRECTORY).iterdir())
+        return sorted(path.name for path in (self.root / RAW).iterdir())
 
     def test_mixed_directory(self) -> None:
-        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, schema.RAW_DIRECTORY)
+        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, RAW)
         self.write("sdlc-A-20260102T120000Z.json",
                    dict(VERSION_ONE, finished="20260102T120000Z"),
-                   schema.RAW_DIRECTORY)
+                   RAW)
         self.write("gotowy.json",
                    dict(VERSION_ONE, schema_version=2, uid="a" * 32, migration_gaps=[]),
-                   schema.RAW_DIRECTORY)
-        found = migrate_all.run(self.root, schema.RAW_DIRECTORY, True)
+                   RAW)
+        found = migrate_all.run(self.root, RAW, True)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(len(self.raw()), 3)
         self.assertIn("gotowy.json", self.raw())
 
     def test_files_written_by_the_migration_are_not_migrated_again(self) -> None:
-        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, schema.RAW_DIRECTORY)
-        found = migrate_all.run(self.root, schema.RAW_DIRECTORY, True)
+        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, RAW)
+        found = migrate_all.run(self.root, RAW, True)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(len(found["gates"]), 1)
         self.assertEqual(len(self.raw()), 1)
 
     def test_empty_directory(self) -> None:
-        found = migrate_all.run(self.root, schema.RAW_DIRECTORY, True)
+        found = migrate_all.run(self.root, RAW, True)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(found["counts"]["notices"], 1)
 
     def test_one_broken_file_does_not_stop_the_others(self) -> None:
-        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, schema.RAW_DIRECTORY)
+        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, RAW)
         broken = dict(VERSION_ONE)
         del broken["agent"]
-        self.write("zly.json", broken, schema.RAW_DIRECTORY)
-        found = migrate_all.run(self.root, schema.RAW_DIRECTORY, True)
+        self.write("zly.json", broken, RAW)
+        found = migrate_all.run(self.root, RAW, True)
         self.assertEqual(found["result"], "FAIL")
         self.assertEqual(len(found["errors"]), 1)
         self.assertIn("zly.json", found["errors"][0]["subject"])
@@ -97,8 +102,8 @@ class MigrateAllTest(unittest.TestCase):
         for day in range(1, 6):
             self.write("sdlc-A-2026010{}T120000Z.json".format(day),
                        dict(VERSION_ONE, finished="2026010{}T120000Z".format(day)),
-                       schema.RAW_DIRECTORY)
-        found = migrate_all.run(self.root, schema.RAW_DIRECTORY, False)
+                       RAW)
+        found = migrate_all.run(self.root, RAW, False)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(len(found["gates"]), 5)
         subjects = [gate.get("subject") or "" for gate in found["gates"]]
@@ -110,14 +115,14 @@ class MigrateAllTest(unittest.TestCase):
         for day in range(1, 5):
             self.write("sdlc-A-2026010{}T120000Z.json".format(day),
                        dict(VERSION_ONE, finished="2026010{}T120000Z".format(day)),
-                       schema.RAW_DIRECTORY)
+                       RAW)
 
         def stable(gates):
             return [(gate.get("gate"), gate.get("result"), gate.get("subject"))
                     for gate in gates]
 
-        many = migrate_all.run(self.root, schema.RAW_DIRECTORY, False)
-        paths = migrate_all.measurements(self.root / schema.RAW_DIRECTORY)
+        many = migrate_all.run(self.root, RAW, False)
+        paths = migrate_all.measurements(self.root / RAW)
         one = [migrate_all.run_one(self.root, path, False) for path in paths]
         self.assertEqual(stable(many["gates"]), stable(one))
 
@@ -140,8 +145,8 @@ class MigrateAllTest(unittest.TestCase):
         self.assertEqual(len(self.raw()), 1)
 
     def test_without_apply_nothing_changes(self) -> None:
-        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, schema.RAW_DIRECTORY)
-        found = migrate_all.run(self.root, schema.RAW_DIRECTORY, False)
+        self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, RAW)
+        found = migrate_all.run(self.root, RAW, False)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(self.raw(), ["sdlc-A-20260101T120000Z.json"])
 

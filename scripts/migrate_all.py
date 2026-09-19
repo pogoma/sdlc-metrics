@@ -133,7 +133,8 @@ def run(root: Path, directory: str, apply: bool) -> Dict[str, object]:
 def parse(argv: List[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Migracja wszystkich pomiarów jednego katalogu.")
-    parser.add_argument("--directory", default=schema.RAW_DIRECTORY)
+    parser.add_argument("--directory", default="{}/{}".format(
+        schema.RAW_DIRECTORY, schema.PROCESS_KIND))
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--root", default=None)
     return parser.parse_args(argv[1:])
