@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "29e0555442b14a29b72ddf0dd85d3025",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Wpis inboxa o pushu submodułu niepotwierdzanym przez etap commit",
+  "migration_gaps": [],
+  "started": "20260919T081823Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "619d87fa"
+    ]
+  },
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 2
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 1
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260919T082004Z"
+}
