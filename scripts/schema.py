@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# python-file: module
 """Reading a measurement schema and checking a document against it (SDLC-0013).
 
 A schema lives in schemas/<version>.json of this repository and is the only

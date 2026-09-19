@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# python-file: script
 """Gate over stored measurements (SDLC-0013).
 
 Checks each measurement against the schema of the version it declares, not

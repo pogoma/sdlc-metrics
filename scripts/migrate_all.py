@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# python-file: script
 """Migration of every measurement in one directory (SDLC-0013).
 
     ./scripts/migrate_all.py [--directory raw] [--apply]

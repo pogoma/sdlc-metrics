@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# python-file: script
 """Migration of a measurement from version 1 to version 2 (SDLC-0013).
 
 Version 2 adds three fields to version 1: the schema version in the content,

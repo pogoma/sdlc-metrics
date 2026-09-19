@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# python-file: script
 """All migrations of one measurement, from its version to the newest (SDLC-0013).
 
     ./scripts/migrate.py <path> [--from <version>] [--to <version>] [--apply]

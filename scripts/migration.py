@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# python-file: module
 """Machinery of one migration step between two versions (SDLC-0013).
 
 Every migration script does the same thing in the same order, so the order

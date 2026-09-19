@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+# python-file: module
 """The answer every script of this repository gives to ``--usage``.
 
 The shape is the one the process requires of every file meant to be run

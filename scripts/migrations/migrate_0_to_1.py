@@ -1,4 +1,5 @@
 #!/usr/bin/env python3
+# python-file: script
 """Migration of a measurement from version 0 to version 1 (SDLC-0013).
 
 Version 0 is what the metrics repository held before the shape was settled:
