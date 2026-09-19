@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "uid": "e9ee3cd333454e14a270370c93492fab",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "description": "Realizacja projektu zmiany: praca obok siebie i wywołanie protokołu importem",
+  "migration_gaps": [],
+  "started": "20260919T082829Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "619d87fa"
+    ]
+  },
+  "interactions": 6,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 2
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 1
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 3
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 0
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 11
+    }
+  },
+  "finished": "20260919T085734Z"
+}
