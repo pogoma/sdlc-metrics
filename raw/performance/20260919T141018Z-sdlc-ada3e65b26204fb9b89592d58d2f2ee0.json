@@ -1,0 +1,63 @@
+{
+  "schema_version": 1,
+  "kind": "performance",
+  "uid": "ada3e65b26204fb9b89592d58d2f2ee0",
+  "project": "sdlc",
+  "finished": "20260919T141018Z",
+  "commands": [
+    {
+      "file": "scripts/measurements_summary.py",
+      "name": "run",
+      "arguments": [],
+      "repetitions": 3,
+      "runs": [
+        {
+          "duration_ms": 6.167,
+          "outcome": "ok",
+          "spans": [
+            {
+              "operation": "odczyt pomiarów",
+              "duration_ms": 3.317,
+              "span_id": "934bfba8e6dd5d11",
+              "parent_span_id": "4e841ee6b4a0cc00"
+            }
+          ]
+        },
+        {
+          "duration_ms": 6.073,
+          "outcome": "ok",
+          "spans": [
+            {
+              "operation": "odczyt pomiarów",
+              "duration_ms": 3.256,
+              "span_id": "e3be5015917230e3",
+              "parent_span_id": "0372e87a70583c63"
+            }
+          ]
+        },
+        {
+          "duration_ms": 6.279,
+          "outcome": "ok",
+          "spans": [
+            {
+              "operation": "odczyt pomiarów",
+              "duration_ms": 3.321,
+              "span_id": "9b0a3d3c606139f8",
+              "parent_span_id": "00f290db19f33804"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "environment": {
+    "system": "Linux",
+    "release": "7.0.0-31-generic",
+    "machine": "x86_64",
+    "python": "3.12.3",
+    "cpu_count": 22,
+    "memory_bytes": 66842238976,
+    "load_average": 1.145
+  },
+  "migration_gaps": []
+}
