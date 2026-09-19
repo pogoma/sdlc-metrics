@@ -24,6 +24,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 import schema
+import usage
 
 GATE = "metrics:migrate"
 RULE = "SDLC-0013"
@@ -180,7 +181,27 @@ def parse(argv: List[str]) -> argparse.Namespace:
     return parser.parse_args(argv[1:])
 
 
+USAGE_COMMANDS = (usage.command(
+    usage.PLAIN_COMMAND,
+    "Przenosi jeden pomiar na najnowszą wersję schematu.",
+    changes=True,
+    arguments=[
+        usage.described("<ścieżka>", "Plik pomiaru do migracji."),
+        usage.described("--from", "Wersja początkowa, gdy pomiar jej nie niesie."),
+        usage.described("--to", "Wersja docelowa migracji."),
+        usage.described("--root", "Korzeń repozytorium metryk."),
+        usage.described("--apply", "Zgoda na zapis; bez niej tylko raport."),
+    ],
+    confirms=[
+        usage.described("pomiar", "Plik niesie wersję docelową schematu."),
+    ],
+),)
+
+
 def main(argv: List[str]) -> int:
+    if usage.asked(argv):
+        return usage.emit(usage.report(
+            "migrate.py", USAGE_COMMANDS))
     options = parse(argv)
     root = Path(options.root) if options.root else repository_root(Path(__file__))
     document = run(root, Path(options.path), options.source, options.target,

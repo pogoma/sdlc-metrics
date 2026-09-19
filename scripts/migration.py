@@ -33,6 +33,7 @@ from pathlib import Path
 from typing import Callable, Dict, List, Optional
 
 import schema
+import usage
 
 DAMAGED_DIRECTORY = "damaged"
 RULE = "SDLC-0013"
@@ -229,9 +230,32 @@ def parse(argv: List[str], source: int, target: int) -> argparse.Namespace:
     return parser.parse_args(argv[1:])
 
 
+def usage_commands(source: int, target: int) -> tuple:
+    """What a migration script answers --usage with.
+
+    One shape for every migration, because they differ only in the versions
+    they carry a measurement between (SDLC-0036).
+    """
+    return (usage.command(
+        usage.PLAIN_COMMAND,
+        "Przenosi pomiar z wersji {} na wersję {}.".format(source, target),
+        changes=True,
+        arguments=[
+            usage.described("<ścieżka>", "Plik pomiaru w wersji {}.".format(source)),
+            usage.described("--carry-gaps", "Plik z brakami niesionymi z wcześniejszej migracji."),
+            usage.described("--root", "Korzeń repozytorium metryk."),
+            usage.described("--apply", "Zgoda na zapis; bez niej tylko raport."),
+        ],
+        confirms=[
+            usage.described("pomiar", "Plik niesie wersję {} schematu.".format(target)),
+        ]),)
+
+
 def main(argv: List[str], script: Path, source: int, target: int,
          transform: Transform, name: Name) -> int:
     """Entry point every migration script shares."""
+    if usage.asked(argv):
+        return usage.emit(usage.report(script.name, usage_commands(source, target)))
     options = parse(argv, source, target)
     root = Path(options.root) if options.root else repository_root(script)
     report = Report("metrics:migrate:{}-{}".format(source, target))

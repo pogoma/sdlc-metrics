@@ -21,6 +21,7 @@ from pathlib import Path
 from typing import Dict, List, Optional
 
 import schema
+import usage
 
 GATE = "metrics:schema"
 RULE = "SDLC-0013"
@@ -104,7 +105,17 @@ def run(root: Path, arguments: List[str]) -> Dict[str, object]:
     return report(errors, notices)
 
 
+USAGE_COMMANDS = (usage.command(
+    usage.PLAIN_COMMAND,
+    "Sprawdza pomiary repozytorium wobec ich schematów.",
+    changes=False,
+),)
+
+
 def main(argv: List[str]) -> int:
+    if usage.asked(argv):
+        return usage.emit(usage.report(
+            "validate.py", USAGE_COMMANDS))
     root = repository_root(Path(__file__))
     document = run(root, list(argv[1:]))
     print(json.dumps(document, ensure_ascii=False, indent=2))

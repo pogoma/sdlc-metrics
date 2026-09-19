@@ -31,6 +31,7 @@ from pathlib import Path
 from typing import Dict, List
 
 import schema
+import usage
 
 GATE = "metrics:migrate:all"
 RULE = "SDLC-0013"
@@ -137,7 +138,25 @@ def parse(argv: List[str]) -> argparse.Namespace:
     return parser.parse_args(argv[1:])
 
 
+USAGE_COMMANDS = (usage.command(
+    usage.PLAIN_COMMAND,
+    "Migruje wszystkie pomiary jednego katalogu.",
+    changes=True,
+    arguments=[
+        usage.described("--directory", "Katalog pomiarów do migracji."),
+        usage.described("--root", "Korzeń repozytorium metryk."),
+        usage.described("--apply", "Zgoda na zapis; bez niej tylko raport."),
+    ],
+    confirms=[
+        usage.described("pomiary", "Każdy plik katalogu niesie najnowszą wersję schematu."),
+    ],
+),)
+
+
 def main(argv: List[str]) -> int:
+    if usage.asked(argv):
+        return usage.emit(usage.report(
+            "migrate_all.py", USAGE_COMMANDS))
     options = parse(argv)
     root = Path(options.root) if options.root else repository_root(Path(__file__))
     document = run(root, options.directory, options.apply)
