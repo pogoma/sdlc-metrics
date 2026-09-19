@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "2e2bd51dd21d445b887c7ebc50492944",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "convention-python",
+  "description": "Przyspieszenie testów bramki konwencji przez pominięcie uruchamiania testów tam, gdzie test sprawdza tylko kontrole statyczne",
+  "migration_gaps": [],
+  "started": "20260919T125316Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 3,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 1
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 2
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260919T130157Z"
+}
