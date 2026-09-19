@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "ce4c0ab4de8d408fa809768df43ac8fa",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Przenieś kontrolę deskryptora wydajności do procesu",
+  "migration_gaps": [],
+  "started": "20260919T183712Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "session_01VH5AP9LcYSRrtWmhLAJfxM"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 5
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 2
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 1
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260919T184155Z"
+}
