@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "uid": "b7312f53a1dc4e7ea819cd24f595bad1",
+  "protocol": "H",
+  "name": "scalanie",
+  "project": "sdlc",
+  "description": "Scalenie pull requestów pr-agenta-i-przeglad-zmian (sdlc#28, sdlc-devel#62).",
+  "migration_gaps": [],
+  "started": "20260921T112632Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "978dd94b-7822-4e06-b726-d32ac4429707"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "checks_failed": {
+      "definition": "pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia",
+      "value": 2
+    },
+    "merged_without_checks": {
+      "definition": "scalenia wykonane z --without-checks",
+      "value": 2
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "pull_requests_merged": {
+      "definition": "scalone pull requesty",
+      "value": 2
+    }
+  },
+  "finished": "20260921T112920Z"
+}
