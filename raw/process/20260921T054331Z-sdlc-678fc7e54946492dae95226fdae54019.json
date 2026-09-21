@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "uid": "678fc7e54946492dae95226fdae54019",
+  "protocol": "Y",
+  "name": "migracja wersji konwencji",
+  "project": "sdlc",
+  "description": "Przeniesienie projektu na konwencję Pythona w wersji v1.8.0",
+  "migration_gaps": [],
+  "started": "20260921T054152Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "decisions_added": {
+      "definition": "decyzje, które doszły w zasobie",
+      "value": 0
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 0
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "decisions_renumbered": {
+      "definition": "decyzje, które zmieniły identyfikator albo właściciela",
+      "value": 0
+    },
+    "documents_adapted": {
+      "definition": "dokumenty projektu zmienione przez migrację",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_conflicts": {
+      "definition": "kolizje reguły zasobu z decyzją projektu",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "references_fixed": {
+      "definition": "poprawione odwołania do decyzji i do plików",
+      "value": 0
+    }
+  },
+  "finished": "20260921T054331Z"
+}
