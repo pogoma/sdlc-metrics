@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "uid": "a7ab072fca4d40248b379d92da2e1142",
+  "protocol": "H",
+  "name": "scalanie",
+  "project": "sdlc",
+  "description": "Scalenie migracji konwencji python na v2.1.0",
+  "migration_gaps": [],
+  "started": "20260921T154558Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "checks_failed": {
+      "definition": "pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia",
+      "value": 2
+    },
+    "merged_without_checks": {
+      "definition": "scalenia wykonane z --without-checks",
+      "value": 2
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "pull_requests_merged": {
+      "definition": "scalone pull requesty",
+      "value": 2
+    }
+  },
+  "finished": "20260921T154754Z"
+}
