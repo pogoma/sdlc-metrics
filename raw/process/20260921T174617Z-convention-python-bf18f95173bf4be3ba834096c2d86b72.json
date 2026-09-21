@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "uid": "bf18f95173bf4be3ba834096c2d86b72",
+  "protocol": "H",
+  "name": "scalanie",
+  "project": "convention-python",
+  "description": "Scalenie migracji na proces v11.0.0",
+  "migration_gaps": [],
+  "started": "20260921T174602Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "checks_failed": {
+      "definition": "pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia",
+      "value": 1
+    },
+    "merged_without_checks": {
+      "definition": "scalenia wykonane z --without-checks",
+      "value": 1
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "pull_requests_merged": {
+      "definition": "scalone pull requesty",
+      "value": 1
+    }
+  },
+  "finished": "20260921T174617Z"
+}
