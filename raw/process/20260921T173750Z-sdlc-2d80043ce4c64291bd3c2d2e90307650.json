@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "2d80043ce4c64291bd3c2d2e90307650",
+  "protocol": "W",
+  "name": "wydanie wersji",
+  "project": "sdlc",
+  "description": "Wydanie wersji v11.0.0",
+  "migration_gaps": [],
+  "started": "20260921T173738Z",
+  "agent": {
+    "name": "skrypt wydania",
+    "sessions": [
+      "skrypt wydania"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "commits_released": {
+      "definition": "commity produktu od poprzedniego tagu",
+      "value": 3
+    },
+    "decisions_added": {
+      "definition": "decyzje, które doszły od poprzedniego tagu",
+      "value": 1
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 6
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "resumptions": {
+      "definition": "wywołania, które podjęły przerwane wydanie tej wersji",
+      "value": 0
+    }
+  },
+  "finished": "20260921T173750Z"
+}
