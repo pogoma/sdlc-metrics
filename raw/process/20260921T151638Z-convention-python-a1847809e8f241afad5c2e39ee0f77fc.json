@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "uid": "a1847809e8f241afad5c2e39ee0f77fc",
+  "protocol": "Y",
+  "name": "wydanie wersji konwencji",
+  "project": "convention-python",
+  "description": "Wydanie konwencji v2.1.0 z biblioteką libs.json_schema",
+  "migration_gaps": [],
+  "started": "20260921T151240Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 0,
+  "corrections": [],
+  "measurements": {
+    "decisions_added": {
+      "definition": "decyzje, które doszły w zasobie",
+      "value": 0
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 0
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "decisions_renumbered": {
+      "definition": "decyzje, które zmieniły identyfikator albo właściciela",
+      "value": 0
+    },
+    "documents_adapted": {
+      "definition": "dokumenty projektu zmienione przez migrację",
+      "value": 0
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 0
+    },
+    "owner_conflicts": {
+      "definition": "kolizje reguły zasobu z decyzją projektu",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "references_fixed": {
+      "definition": "poprawione odwołania do decyzji i do plików",
+      "value": 0
+    }
+  },
+  "finished": "20260921T151638Z"
+}
