@@ -1,0 +1,37 @@
+{
+  "schema_version": 2,
+  "uid": "c9238a12ce2444568efb1915b94506ad",
+  "protocol": "H",
+  "name": "scalanie",
+  "project": "sdlc",
+  "description": "Scalenie łaty aktualnej gałęzi głównej",
+  "migration_gaps": [],
+  "started": "20260921T175532Z",
+  "agent": {
+    "name": "nieznany",
+    "sessions": [
+      "nieznana"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "checks_failed": {
+      "definition": "pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia",
+      "value": 2
+    },
+    "merged_without_checks": {
+      "definition": "scalenia wykonane z --without-checks",
+      "value": 2
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "pull_requests_merged": {
+      "definition": "scalone pull requesty",
+      "value": 2
+    }
+  },
+  "finished": "20260921T175545Z"
+}
