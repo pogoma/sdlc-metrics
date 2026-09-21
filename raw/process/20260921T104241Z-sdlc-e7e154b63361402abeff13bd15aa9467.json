@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "uid": "e7e154b63361402abeff13bd15aa9467",
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "description": "Pull request wystawiany przez skrypt zamknięcia zamiast przebiegu CI, protokół scalania i przegląd zmian od ostatniego przeglądu w IDE.",
+  "migration_gaps": [],
+  "started": "20260921T090803Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "978dd94b-7822-4e06-b726-d32ac4429707"
+    ]
+  },
+  "interactions": 3,
+  "corrections": [],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 2
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 6
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 2
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 0
+    }
+  },
+  "finished": "20260921T104241Z"
+}
