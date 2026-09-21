@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "7d501deb24de431da626fef6ec1a329e",
+  "protocol": "C",
+  "name": "prosta zmiana",
+  "project": "sdlc",
+  "description": "Wpisy inboxa z sesji wydajności i wydania v10.0.0.",
+  "migration_gaps": [],
+  "started": "20260921T141110Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "978dd94b-7822-4e06-b726-d32ac4429707"
+    ]
+  },
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "escalations": {
+      "definition": "ile razy praca wróciła do planowania, bo dotykała zachowania",
+      "value": 0
+    },
+    "files_changed": {
+      "definition": "zmienione pliki",
+      "value": 6
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "owner_stops": {
+      "definition": "zatrzymania po decyzję właściciela",
+      "value": 2
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    }
+  },
+  "finished": "20260921T142600Z"
+}
