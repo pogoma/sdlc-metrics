@@ -1,0 +1,57 @@
+{
+  "schema_version": 2,
+  "uid": "5ca7a9cede0e4e1080cf00b966679bc6",
+  "protocol": "B",
+  "name": "realizacja projektu zmiany",
+  "project": "sdlc",
+  "description": "Realizacja: pull request z zamknięcia, protokół scalania i przegląd zmian w IDE.",
+  "migration_gaps": [],
+  "started": "20260921T104519Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "978dd94b-7822-4e06-b726-d32ac4429707"
+    ]
+  },
+  "interactions": 3,
+  "corrections": [],
+  "measurements": {
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 4
+    },
+    "plan_gaps": {
+      "definition": "ile razy projekt zmiany okazał się zły albo niepełny",
+      "value": 1
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 3
+    },
+    "repositories_touched": {
+      "definition": "repozytoria, które dostały commit",
+      "value": 2
+    },
+    "review_corrections": {
+      "definition": "odpowiedzi „poprawki” w pętli przeglądu",
+      "value": 0
+    },
+    "review_rounds": {
+      "definition": "prośby o przegląd",
+      "value": 1
+    },
+    "scope_conflicts": {
+      "definition": "uwagi wykraczające poza sekcję „Poza zakresem”",
+      "value": 0
+    },
+    "steps_deviated": {
+      "definition": "kroki, których wynik rozjechał się z zapisanym",
+      "value": 1
+    },
+    "steps_total": {
+      "definition": "kroki wykonawcze zapisane w projekcie zmiany",
+      "value": 9
+    }
+  },
+  "finished": "20260921T112217Z"
+}
