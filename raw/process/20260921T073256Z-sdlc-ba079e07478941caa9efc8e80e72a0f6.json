@@ -1,0 +1,49 @@
+{
+  "schema_version": 2,
+  "uid": "ba079e07478941caa9efc8e80e72a0f6",
+  "protocol": "A",
+  "name": "planowanie zmiany",
+  "project": "sdlc",
+  "description": "Wydajność skryptów procesu: mechanika protokołu importem, jedno usage na skrypt, tańsza lista submodułów.",
+  "migration_gaps": [],
+  "started": "20260921T070826Z",
+  "agent": {
+    "name": "Claude Opus 5",
+    "sessions": [
+      "978dd94b-7822-4e06-b726-d32ac4429707"
+    ]
+  },
+  "interactions": 2,
+  "corrections": [],
+  "measurements": {
+    "approval_rounds": {
+      "definition": "ile razy przedstawiono projekt zmiany do zatwierdzenia",
+      "value": 1
+    },
+    "closure_loops": {
+      "definition": "przebiegi pętli domknięcia",
+      "value": 2
+    },
+    "gate_failures": {
+      "definition": "przebiegi weryfikacji z wynikiem FAIL",
+      "value": 1
+    },
+    "plan_questions": {
+      "definition": "pytania przedstawione właścicielowi",
+      "value": 0
+    },
+    "plan_revisions": {
+      "definition": "zmiany planu przebiegu po jego zatwierdzeniu",
+      "value": 0
+    },
+    "question_rounds": {
+      "definition": "ile razy praca zatrzymała się na pytaniach",
+      "value": 0
+    },
+    "research_requests": {
+      "definition": "pytania o zgodę na oparcie się na materiale badawczym",
+      "value": 0
+    }
+  },
+  "finished": "20260921T073256Z"
+}
