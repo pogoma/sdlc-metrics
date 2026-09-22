@@ -1,0 +1,35 @@
+schema_version: 3
+uid: 3ce40214178d46b6bc4efbb78fceff98
+protocol: C
+name: prosta zmiana
+project: convention-python
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Dodanie do inboxa potrzeby znacznika rodzaju pliku
+interactions: 1
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260919T093540Z
+finished: 20260919T094015Z

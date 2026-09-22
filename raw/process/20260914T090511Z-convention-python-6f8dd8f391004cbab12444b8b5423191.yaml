@@ -1,0 +1,41 @@
+schema_version: 3
+uid: 6f8dd8f391004cbab12444b8b5423191
+protocol: A
+name: planowanie zmiany
+project: convention-python
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: skrypt automatycznie formatujący pliki Pythona dla skryptów procesu
+interactions: 4
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 1
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 6
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 3
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 5
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 2
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260914T070138Z
+finished: 20260914T090511Z

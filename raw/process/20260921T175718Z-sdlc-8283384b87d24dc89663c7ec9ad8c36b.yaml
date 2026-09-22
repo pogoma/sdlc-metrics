@@ -1,0 +1,35 @@
+schema_version: 3
+uid: 8283384b87d24dc89663c7ec9ad8c36b
+protocol: W
+name: wydanie wersji
+project: sdlc
+agents:
+  - name: skrypt wydania
+    model: nieznany
+    sessions:
+      - skrypt wydania
+description: Wydanie wersji v11.0.1
+interactions: 1
+corrections: []
+measurements:
+  commits_released:
+    definition: commity produktu od poprzedniego tagu
+    value: 1
+  decisions_added:
+    definition: decyzje, które doszły od poprzedniego tagu
+    value: 0
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 0
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 0
+  resumptions:
+    definition: wywołania, które podjęły przerwane wydanie tej wersji
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T175707Z
+finished: 20260921T175718Z

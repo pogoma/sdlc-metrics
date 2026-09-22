@@ -1,0 +1,32 @@
+schema_version: 3
+uid: e7cfc050f96d43b9a7970f38a96d4642
+protocol: H
+name: scalanie
+project: sdlc
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - 978dd94b-7822-4e06-b726-d32ac4429707
+description: Scalenie pull requesta migracji na v10.0.0 (sdlc-devel#64).
+interactions: 1
+corrections: []
+measurements:
+  checks_failed:
+    definition: pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia
+    value: 1
+  merged_without_checks:
+    definition: scalenia wykonane z --without-checks
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  pull_requests_merged:
+    definition: scalone pull requesty
+    value: 1
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T130037Z
+finished: 20260921T130051Z

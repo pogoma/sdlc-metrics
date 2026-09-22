@@ -1,0 +1,35 @@
+schema_version: 3
+uid: 55ca77b1c16f4d76957424d72361a4aa
+protocol: C
+name: prosta zmiana
+project: convention-python
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Przyspieszenie formatera i weryfikacji konwencji oraz poprawa wpisów deskryptora testów wydajnościowych.
+interactions: 2
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 7
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T073119Z
+finished: 20260921T073615Z

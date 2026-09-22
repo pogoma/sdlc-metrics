@@ -1,0 +1,35 @@
+schema_version: 3
+uid: d62dd65c27f94d64be4bbb36347c5e6a
+protocol: C
+name: prosta zmiana
+project: sdlc
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - session_013RTCrqo9rXTMUKBtQnkHnJ
+description: "Domknięcie realizacji: zamknięcie Protokołu B usuwa projekt zmiany."
+interactions: 14
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 9
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 2
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260912T091730Z
+finished: 20260912T092517Z

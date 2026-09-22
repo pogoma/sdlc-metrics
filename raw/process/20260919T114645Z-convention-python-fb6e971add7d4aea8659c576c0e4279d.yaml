@@ -1,0 +1,41 @@
+schema_version: 3
+uid: fb6e971add7d4aea8659c576c0e4279d
+protocol: D
+name: przegląd inboxa
+project: convention-python
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: przegląd trzech wpisów inboxa o usterkach skryptów protokołu
+interactions: 3
+corrections: []
+measurements:
+  entries_planned:
+    definition: wpisy skierowane do planowania
+    value: 0
+  entries_rejected:
+    definition: wpisy odrzucone
+    value: 0
+  entries_research:
+    definition: wpisy skierowane na rozpoznanie
+    value: 0
+  entries_reviewed:
+    definition: wpisy wzięte pod uwagę
+    value: 3
+  entries_simple:
+    definition: wpisy załatwione prostą zmianą
+    value: 0
+  owner_rounds:
+    definition: ile razy czekano na decyzję właściciela
+    value: 3
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 6
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260913T073809Z
+finished: 20260919T114645Z

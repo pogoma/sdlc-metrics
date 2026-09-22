@@ -1,0 +1,57 @@
+schema_version: 3
+uid: 7481dacf00fe4d64a604cfa267581e15
+protocol: Z
+name: migracja wersji procesu
+project: convention-python
+agents:
+  - name: Codex (GPT-6); poprzedni agent nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+      - 01a0959f-6c7b-7ee3-82ac-454d4434c2a6
+description: Migracja procesu SDLC do wersji 6.0.0.
+interactions: 1
+corrections: []
+measurements:
+  decisions_added:
+    definition: decyzje, które doszły w zasobie
+    value: 11
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 6
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 0
+  decisions_renumbered:
+    definition: decyzje, które zmieniły identyfikator albo właściciela
+    value: 0
+  documents_adapted:
+    definition: dokumenty projektu zmienione przez migrację
+    value: 8
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 2
+  owner_conflicts:
+    definition: kolizje reguły zasobu z decyzją projektu
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  protocols_adapted:
+    definition: protokoły projektu zmienione przez migrację
+    value: 7
+  protocols_added:
+    definition: protokoły dodane, bo doszły w procesie
+    value: 0
+  protocols_removed:
+    definition: protokoły usunięte, bo zniknęły w procesie
+    value: 0
+  references_fixed:
+    definition: poprawione odwołania do decyzji i do plików
+    value: 1
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260912T103943Z
+finished: 20260912T124415Z

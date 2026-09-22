@@ -1,0 +1,32 @@
+schema_version: 3
+uid: e81b9be72892480d87acff89f87c830f
+protocol: H
+name: scalanie
+project: sdlc
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Scalenie odświeżenia katalogu procesów
+interactions: 1
+corrections: []
+measurements:
+  checks_failed:
+    definition: pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia
+    value: 1
+  merged_without_checks:
+    definition: scalenia wykonane z --without-checks
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  pull_requests_merged:
+    definition: scalone pull requesty
+    value: 1
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T185413Z
+finished: 20260921T185427Z

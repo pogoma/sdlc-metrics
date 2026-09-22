@@ -1,0 +1,47 @@
+schema_version: 3
+uid: fbeed63721114dc7a068619699fc7d7e
+protocol: Y
+name: wydanie wersji konwencji
+project: convention-python
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - 37e0e123-7337-4721-917c-7149f1259654
+description: "Wydanie konwencji Pythona w wersji v1.6.0: testy własnych skryptów i produktu"
+interactions: 2
+corrections: []
+measurements:
+  decisions_added:
+    definition: decyzje, które doszły w zasobie
+    value: 1
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 0
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 0
+  decisions_renumbered:
+    definition: decyzje, które zmieniły identyfikator albo właściciela
+    value: 0
+  documents_adapted:
+    definition: dokumenty projektu zmienione przez migrację
+    value: 0
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_conflicts:
+    definition: kolizje reguły zasobu z decyzją projektu
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  references_fixed:
+    definition: poprawione odwołania do decyzji i do plików
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260918T131656Z
+finished: 20260918T131843Z

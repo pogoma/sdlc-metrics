@@ -1,0 +1,32 @@
+schema_version: 3
+uid: 4c9bc2e5ff834c4891cc9496fc92ac99
+protocol: H
+name: scalanie
+project: sdlc
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Scalenie protokołu wydania
+interactions: 1
+corrections: []
+measurements:
+  checks_failed:
+    definition: pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia
+    value: 2
+  merged_without_checks:
+    definition: scalenia wykonane z --without-checks
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  pull_requests_merged:
+    definition: scalone pull requesty
+    value: 2
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T172258Z
+finished: 20260921T172323Z

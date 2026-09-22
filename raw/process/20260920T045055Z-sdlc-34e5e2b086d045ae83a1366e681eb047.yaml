@@ -1,0 +1,35 @@
+schema_version: 3
+uid: 34e5e2b086d045ae83a1366e681eb047
+protocol: C
+name: prosta zmiana
+project: sdlc
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - session_01VH5AP9LcYSRrtWmhLAJfxM
+description: Uodpornij wczytanie biblioteki YAML na równoległe wywołania
+interactions: 1
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260920T044935Z
+finished: 20260920T045055Z

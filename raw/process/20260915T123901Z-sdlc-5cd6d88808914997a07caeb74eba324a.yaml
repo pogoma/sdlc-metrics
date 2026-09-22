@@ -1,0 +1,35 @@
+schema_version: 3
+uid: 5cd6d88808914997a07caeb74eba324a
+protocol: C
+name: prosta zmiana
+project: sdlc
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: "Poprawka etapu merge: weryfikacja po commicie wskaźnika"
+interactions: 3
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260915T123549Z
+finished: 20260915T123901Z

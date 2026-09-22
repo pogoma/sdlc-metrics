@@ -1,0 +1,56 @@
+schema_version: 3
+uid: 00c48f05e47e4b0b839f0f41d514edfb
+protocol: Z
+name: wydanie i migracja wersji procesu
+project: sdlc
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - 978dd94b-7822-4e06-b726-d32ac4429707
+description: Potwierdzenie zgodności projektu z procesem w wersji v10.0.0.
+interactions: 1
+corrections: []
+measurements:
+  decisions_added:
+    definition: decyzje, które doszły w zasobie
+    value: 2
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 3
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 0
+  decisions_renumbered:
+    definition: decyzje, które zmieniły identyfikator albo właściciela
+    value: 0
+  documents_adapted:
+    definition: dokumenty projektu zmienione przez migrację
+    value: 1
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_conflicts:
+    definition: kolizje reguły zasobu z decyzją projektu
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  protocols_adapted:
+    definition: protokoły projektu zmienione przez migrację
+    value: 1
+  protocols_added:
+    definition: protokoły dodane, bo doszły w procesie
+    value: 0
+  protocols_removed:
+    definition: protokoły usunięte, bo zniknęły w procesie
+    value: 0
+  references_fixed:
+    definition: poprawione odwołania do decyzji i do plików
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T125251Z
+finished: 20260921T125951Z

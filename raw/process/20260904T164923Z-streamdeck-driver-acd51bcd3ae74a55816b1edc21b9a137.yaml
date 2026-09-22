@@ -1,0 +1,35 @@
+schema_version: 3
+uid: acd51bcd3ae74a55816b1edc21b9a137
+protocol: C
+name: prosta zmiana
+project: streamdeck-driver
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - session_01YDvBaqq1Ge24NRUkcQv5n3
+description: Instalacja dodatków warstwy aplikacji w przebiegu weryfikacji w CI.
+interactions: 2
+corrections: []
+measurements:
+  files_changed:
+    definition: zmienione pliki we wszystkich repozytoriach
+    value: 1
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 0
+  escalations:
+    definition: powroty do planowania
+    value: 0
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+migration_gaps:
+  - field: uid
+    from_version: 1
+    reason: wersja 1 nie miała identyfikatora wywołania; nadany przy migracji
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260904T164000Z
+finished: 20260904T164923Z

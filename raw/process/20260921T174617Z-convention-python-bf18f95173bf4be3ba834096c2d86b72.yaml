@@ -1,0 +1,32 @@
+schema_version: 3
+uid: bf18f95173bf4be3ba834096c2d86b72
+protocol: H
+name: scalanie
+project: convention-python
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Scalenie migracji na proces v11.0.0
+interactions: 1
+corrections: []
+measurements:
+  checks_failed:
+    definition: pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia
+    value: 1
+  merged_without_checks:
+    definition: scalenia wykonane z --without-checks
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  pull_requests_merged:
+    definition: scalone pull requesty
+    value: 1
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T174602Z
+finished: 20260921T174617Z

@@ -1,0 +1,56 @@
+schema_version: 3
+uid: 01859f7abd524021b178fb2f4fa5b88b
+protocol: Z
+name: migracja wersji procesu
+project: convention-python
+agents:
+  - name: claude-opus-5
+    model: nieznany
+    sessions:
+      - nieznana
+description: Migracja procesu z v6.0.0 do v7.0.0
+interactions: 2
+corrections: []
+measurements:
+  decisions_added:
+    definition: decyzje, które doszły w zasobie
+    value: 1
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 5
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 0
+  decisions_renumbered:
+    definition: decyzje, które zmieniły identyfikator albo właściciela
+    value: 0
+  documents_adapted:
+    definition: dokumenty projektu zmienione przez migrację
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_conflicts:
+    definition: kolizje reguły zasobu z decyzją projektu
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  protocols_adapted:
+    definition: protokoły projektu zmienione przez migrację
+    value: 0
+  protocols_added:
+    definition: protokoły dodane, bo doszły w procesie
+    value: 0
+  protocols_removed:
+    definition: protokoły usunięte, bo zniknęły w procesie
+    value: 1
+  references_fixed:
+    definition: poprawione odwołania do decyzji i do plików
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260915T151958Z
+finished: 20260915T153842Z

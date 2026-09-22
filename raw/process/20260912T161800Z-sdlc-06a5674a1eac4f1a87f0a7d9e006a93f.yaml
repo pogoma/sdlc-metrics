@@ -1,0 +1,41 @@
+schema_version: 3
+uid: 06a5674a1eac4f1a87f0a7d9e006a93f
+protocol: X
+name: przegląd pomiarów
+project: sdlc
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - session_015j9xSzGvc28aZ8XzTEj3XY
+description: "Pierwszy przegląd pomiarów: wszystkie przebiegi w repozytorium metryk."
+interactions: 9
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  observations:
+    definition: nazwane obserwacje
+    value: 8
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  proposals:
+    definition: przedstawione propozycje zmian procesu
+    value: 6
+  proposals_accepted:
+    definition: propozycje, które właściciel przyjął
+    value: 6
+  protocols_covered:
+    definition: protokoły objęte zestawieniem
+    value: 7
+  runs_read:
+    definition: wczytane pomiary
+    value: 69
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260912T150924Z
+finished: 20260912T161800Z

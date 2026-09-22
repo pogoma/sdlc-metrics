@@ -1,0 +1,47 @@
+schema_version: 3
+uid: 996e5652886245b882d7c171b27b4164
+protocol: B
+name: realizacja projektu zmiany
+project: convention-python
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Wdrożenie znacznika rodzaju pliku Pythona
+interactions: 0
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 0
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 0
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 0
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260919T100909Z
+finished: 20260919T112418Z

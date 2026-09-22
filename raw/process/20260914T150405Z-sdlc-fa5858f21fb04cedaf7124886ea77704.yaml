@@ -1,0 +1,35 @@
+schema_version: 3
+uid: fa5858f21fb04cedaf7124886ea77704
+protocol: C
+name: prosta zmiana
+project: sdlc
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - session_017yTkWjvYhbAThbwmun24ee
+description: "Podbicie wskaźnika docs/sdlc do rewizji scalenia pull requesta #12."
+interactions: 2
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260914T150056Z
+finished: 20260914T150405Z

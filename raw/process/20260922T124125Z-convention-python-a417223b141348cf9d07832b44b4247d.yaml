@@ -1,0 +1,32 @@
+schema_version: 3
+uid: a417223b141348cf9d07832b44b4247d
+protocol: H
+name: scalanie
+project: convention-python
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - 198fa0aa-df14-45d4-8340-8cf407099ba7
+description: Scalenie względnego importu YAML w walidatorze konwencji
+interactions: 4
+corrections: []
+measurements:
+  checks_failed:
+    definition: pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia
+    value: 0
+  merged_without_checks:
+    definition: scalenia wykonane z --without-checks
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  pull_requests_merged:
+    definition: scalone pull requesty
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260922T122928Z
+finished: 20260922T124125Z

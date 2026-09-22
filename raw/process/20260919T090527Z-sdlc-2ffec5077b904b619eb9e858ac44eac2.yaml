@@ -1,0 +1,35 @@
+schema_version: 3
+uid: 2ffec5077b904b619eb9e858ac44eac2
+protocol: C
+name: prosta zmiana
+project: sdlc
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - 619d87fa
+description: Przeformułowanie wpisu inboxa o pushu submodułu na niezgodność z dokumentem
+interactions: 1
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 1
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260919T090357Z
+finished: 20260919T090527Z

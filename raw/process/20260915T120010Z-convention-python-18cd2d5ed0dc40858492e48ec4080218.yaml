@@ -1,0 +1,41 @@
+schema_version: 3
+uid: 18cd2d5ed0dc40858492e48ec4080218
+protocol: A
+name: planowanie zmiany
+project: convention-python
+agents:
+  - name: claude-opus-5
+    model: nieznany
+    sessions:
+      - nieznana
+description: Biblioteki logowania JSON i pomiaru czasu dla skryptów, wytyczna i kontrola ich użycia
+interactions: 4
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 1
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 4
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 2
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 4
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 2
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260915T103508Z
+finished: 20260915T120010Z

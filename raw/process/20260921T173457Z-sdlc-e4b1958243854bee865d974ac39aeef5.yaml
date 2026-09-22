@@ -1,0 +1,35 @@
+schema_version: 3
+uid: e4b1958243854bee865d974ac39aeef5
+protocol: C
+name: prosta zmiana
+project: sdlc
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Pomiar czekający na commit i podgląd wydania
+interactions: 2
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 4
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260921T173138Z
+finished: 20260921T173457Z

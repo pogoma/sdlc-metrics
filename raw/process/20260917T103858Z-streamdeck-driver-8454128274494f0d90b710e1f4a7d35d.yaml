@@ -1,0 +1,56 @@
+schema_version: 3
+uid: 8454128274494f0d90b710e1f4a7d35d
+protocol: Z
+name: migracja wersji procesu
+project: streamdeck-driver
+agents:
+  - name: nieznany
+    model: nieznany
+    sessions:
+      - nieznana
+description: Migracja procesu SDLC do v8.0.0.
+interactions: 3
+corrections: []
+measurements:
+  decisions_added:
+    definition: decyzje, które doszły w zasobie
+    value: 12
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 8
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 1
+  decisions_renumbered:
+    definition: decyzje, które zmieniły identyfikator albo właściciela
+    value: 0
+  documents_adapted:
+    definition: dokumenty projektu zmienione przez migrację
+    value: 8
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 3
+  owner_conflicts:
+    definition: kolizje reguły zasobu z decyzją projektu
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  protocols_adapted:
+    definition: protokoły projektu zmienione przez migrację
+    value: 6
+  protocols_added:
+    definition: protokoły dodane, bo doszły w procesie
+    value: 0
+  protocols_removed:
+    definition: protokoły usunięte, bo zniknęły w procesie
+    value: 1
+  references_fixed:
+    definition: poprawione odwołania do decyzji i do plików
+    value: 8
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260917T095415Z
+finished: 20260917T103858Z

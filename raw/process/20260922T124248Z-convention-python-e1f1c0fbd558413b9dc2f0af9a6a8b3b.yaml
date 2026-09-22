@@ -1,0 +1,35 @@
+schema_version: 3
+uid: e1f1c0fbd558413b9dc2f0af9a6a8b3b
+protocol: W
+name: wydanie wersji
+project: convention-python
+agents:
+  - name: skrypt wydania
+    model: nieznany
+    sessions:
+      - skrypt wydania
+description: Wydanie wersji v2.1.1
+interactions: 1
+corrections: []
+measurements:
+  commits_released:
+    definition: commity produktu od poprzedniego tagu
+    value: 1
+  decisions_added:
+    definition: decyzje, które doszły od poprzedniego tagu
+    value: 0
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 0
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 0
+  resumptions:
+    definition: wywołania, które podjęły przerwane wydanie tej wersji
+    value: 0
+migration_gaps:
+  - field: agents.model
+    from_version: 2
+    reason: wersja 2 nie zapisywała modelu; wpisano nieznany
+started: 20260922T124237Z
+finished: 20260922T124248Z
