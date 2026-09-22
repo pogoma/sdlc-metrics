@@ -1,0 +1,41 @@
+{
+  "schema_version": 2,
+  "uid": "e1f1c0fbd558413b9dc2f0af9a6a8b3b",
+  "protocol": "W",
+  "name": "wydanie wersji",
+  "project": "convention-python",
+  "description": "Wydanie wersji v2.1.1",
+  "migration_gaps": [],
+  "started": "20260922T124237Z",
+  "agent": {
+    "name": "skrypt wydania",
+    "sessions": [
+      "skrypt wydania"
+    ]
+  },
+  "interactions": 1,
+  "corrections": [],
+  "measurements": {
+    "commits_released": {
+      "definition": "commity produktu od poprzedniego tagu",
+      "value": 1
+    },
+    "decisions_added": {
+      "definition": "decyzje, które doszły od poprzedniego tagu",
+      "value": 0
+    },
+    "decisions_changed": {
+      "definition": "decyzje o zmienionej treści",
+      "value": 0
+    },
+    "decisions_removed": {
+      "definition": "decyzje zniesione",
+      "value": 0
+    },
+    "resumptions": {
+      "definition": "wywołania, które podjęły przerwane wydanie tej wersji",
+      "value": 0
+    }
+  },
+  "finished": "20260922T124248Z"
+}
