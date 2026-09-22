@@ -13,7 +13,7 @@ sys.path.insert(0, str(SCRIPTS))
 sys.path.insert(0, str(SCRIPTS / "migrations"))
 
 import migrate_0_to_1
-import schema
+import kinds
 
 SCRIPT = SCRIPTS / "migrations" / "migrate_0_to_1.py"
 
@@ -30,18 +30,18 @@ class MigrateZeroToOneTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.PROCESS_KIND,
-                                  schema.repository_root(Path(schema.__file__)))
-        target = self.root / schema.SCHEMAS_DIRECTORY / schema.PROCESS_KIND
+        source = kinds.directory(kinds.PROCESS_KIND,
+                                  kinds.repository_root(Path(kinds.__file__)))
+        target = self.root / kinds.SCHEMAS_DIRECTORY / kinds.PROCESS_KIND
         target.mkdir(parents=True)
-        for path in source.glob("*.json"):
+        for path in source.glob("*.yaml"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
-        (self.root / schema.RAW_DIRECTORY / schema.PROCESS_KIND).mkdir(parents=True)
-        (self.root / schema.LEGACY_DIRECTORY).mkdir()
+        (self.root / kinds.RAW_DIRECTORY / kinds.PROCESS_KIND).mkdir(parents=True)
+        (self.root / kinds.LEGACY_DIRECTORY).mkdir()
 
     def write(self, name: str, document: object) -> Path:
-        path = self.root / schema.LEGACY_DIRECTORY / name
+        path = self.root / kinds.LEGACY_DIRECTORY / name
         path.write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
         return path
 
@@ -59,7 +59,7 @@ class MigrateZeroToOneTest(unittest.TestCase):
         report = self.call(path, "--apply")
         self.assertEqual(report["result"], "PASS")
         stored = self.stored(report)
-        self.assertEqual(schema.validate(stored, 1, self.root), [])
+        self.assertEqual(kinds.validate(stored, 1, self.root), [])
         self.assertEqual(stored["protocol"], "A-B")
         self.assertEqual(stored["name"], "protokol-a-b")
         self.assertEqual(stored["run_id"], "af41ec7")
@@ -92,7 +92,7 @@ class MigrateZeroToOneTest(unittest.TestCase):
         report = self.call(path, "--apply")
         stored = self.stored(report)
         self.assertEqual(stored["protocol"], migrate_0_to_1.UNKNOWN_PROTOCOL)
-        self.assertEqual(schema.validate(stored, 1, self.root), [])
+        self.assertEqual(kinds.validate(stored, 1, self.root), [])
         fields = [entry["field"] for entry in report["gaps"]]
         self.assertIn("protocol", fields)
 
@@ -117,11 +117,11 @@ class MigrateZeroToOneTest(unittest.TestCase):
         path = self.write("a-20260820T192700Z.json", document)
         report = self.call(path, "--apply")
         self.assertEqual(report["result"], "FAIL")
-        self.assertIn("brak pola run_id", report["errors"][0]["message"])
+        self.assertIn("brak wymaganego pola run_id", report["errors"][0]["message"])
         self.assertTrue(path.exists())
 
     def test_measurement_from_raw_is_read_as_version_one(self) -> None:
-        path = self.root / schema.RAW_DIRECTORY / "a.json"
+        path = self.root / kinds.RAW_DIRECTORY / "a.json"
         path.write_text(json.dumps(VERSION_ZERO), encoding="utf-8")
         report = self.call(path, "--apply")
         self.assertEqual(report["result"], "FAIL")

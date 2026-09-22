@@ -31,7 +31,7 @@ from concurrent.futures import ThreadPoolExecutor
 from pathlib import Path
 from typing import Dict, List
 
-import schema
+import kinds
 import usage
 
 GATE = "metrics:migrate:all"
@@ -134,7 +134,7 @@ def parse(argv: List[str]) -> argparse.Namespace:
     parser = argparse.ArgumentParser(
         description="Migracja wszystkich pomiarów jednego katalogu.")
     parser.add_argument("--directory", default="{}/{}".format(
-        schema.RAW_DIRECTORY, schema.PROCESS_KIND))
+        kinds.RAW_DIRECTORY, kinds.PROCESS_KIND))
     parser.add_argument("--apply", action="store_true")
     parser.add_argument("--root", default=None)
     return parser.parse_args(argv[1:])

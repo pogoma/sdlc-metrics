@@ -10,11 +10,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import migration
-import schema
+import kinds
 
 # Schemas and measurements live in the directory of their kind (SDLC-0030).
-SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
-RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+SCHEMAS = "{}/{}".format(kinds.SCHEMAS_DIRECTORY, kinds.PROCESS_KIND)
+RAW = "{}/{}".format(kinds.RAW_DIRECTORY, kinds.PROCESS_KIND)
 
 VERSION_ONE = {
     "protocol": "A",
@@ -47,11 +47,11 @@ class MigrationTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.PROCESS_KIND,
-                                 schema.repository_root(Path(schema.__file__)))
+        source = kinds.directory(kinds.PROCESS_KIND,
+                                 kinds.repository_root(Path(kinds.__file__)))
         target = self.root / SCHEMAS
         target.mkdir(parents=True)
-        for path in source.glob("*.json"):
+        for path in source.glob("*.yaml"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
         self.uid = migration.new_uid
@@ -104,7 +104,7 @@ class MigrationTest(unittest.TestCase):
         report = self.step(path)
         self.assertEqual(report.as_document()["result"], "FAIL")
         self.assertTrue(path.exists())
-        self.assertIn("wersja 1: pomiar: brak pola interactions",
+        self.assertIn("wersja 1: pomiar: brak wymaganego pola interactions",
                       report.errors[0]["message"])
 
     def test_result_that_does_not_fit_goes_to_damaged(self) -> None:
@@ -140,7 +140,7 @@ class MigrationTest(unittest.TestCase):
         path = self.write("a.json", "{")
         report = self.step(path)
         self.assertEqual(report.as_document()["result"], "FAIL")
-        self.assertIn("nie jest poprawnym JSON-em", report.errors[0]["message"])
+        self.assertIn("niepoprawny JSON", report.errors[0]["message"])
 
     def test_file_that_is_not_an_object(self) -> None:
         path = self.write("a.json", [1, 2])

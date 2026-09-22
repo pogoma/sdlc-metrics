@@ -10,11 +10,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import migrate
-import schema
+import kinds
 
 # Schemas and measurements live in the directory of their kind (SDLC-0030).
-SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
-RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+SCHEMAS = "{}/{}".format(kinds.SCHEMAS_DIRECTORY, kinds.PROCESS_KIND)
+RAW = "{}/{}".format(kinds.RAW_DIRECTORY, kinds.PROCESS_KIND)
 
 VERSION_ZERO = {
     "project": "agent-skills",
@@ -41,15 +41,15 @@ class MigrateTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.PROCESS_KIND,
-                                 schema.repository_root(Path(schema.__file__)))
+        source = kinds.directory(kinds.PROCESS_KIND,
+                                 kinds.repository_root(Path(kinds.__file__)))
         self.schemas = self.root / SCHEMAS
         self.schemas.mkdir(parents=True)
-        for path in source.glob("*.json"):
+        for path in source.glob("*.yaml"):
             (self.schemas / path.name).write_text(path.read_text(encoding="utf-8"),
                                                   encoding="utf-8")
         (self.root / RAW).mkdir(parents=True)
-        (self.root / schema.LEGACY_DIRECTORY).mkdir()
+        (self.root / kinds.LEGACY_DIRECTORY).mkdir()
 
     def write(self, name: str, document: object, directory: str) -> Path:
         path = self.root / directory / name
@@ -61,32 +61,36 @@ class MigrateTest(unittest.TestCase):
 
     def test_version_zero_reaches_the_newest_version(self) -> None:
         path = self.write("agent-skills-protokol-a-b-20260820T192700Z.json",
-                          VERSION_ZERO, schema.LEGACY_DIRECTORY)
+                          VERSION_ZERO, kinds.LEGACY_DIRECTORY)
         found = self.chain(path)
         self.assertEqual(found["result"], "PASS")
-        self.assertEqual(found["version"], 2)
-        self.assertEqual(len(found["gates"]), 2)
+        self.assertEqual(found["version"], 3)
+        self.assertEqual(len(found["gates"]), 3)
         self.assertFalse(path.exists())
-        stored = json.loads((self.root / found["target"]).read_text(encoding="utf-8"))
-        self.assertEqual(schema.validate(stored, 2, self.root, schema.PROCESS_KIND), [])
+        self.assertTrue(found["target"].endswith(".yaml"))
+        stored = kinds.read(self.root / found["target"])
+        self.assertEqual(kinds.validate(stored, 3, self.root, kinds.PROCESS_KIND), [])
 
     def test_gaps_of_the_first_step_land_in_the_stored_file(self) -> None:
         path = self.write("agent-skills-protokol-a-b-20260820T192700Z.json",
-                          VERSION_ZERO, schema.LEGACY_DIRECTORY)
+                          VERSION_ZERO, kinds.LEGACY_DIRECTORY)
         found = self.chain(path)
-        stored = json.loads((self.root / found["target"]).read_text(encoding="utf-8"))
+        stored = kinds.read(self.root / found["target"])
         fields = [entry["field"] for entry in stored["migration_gaps"]]
         self.assertEqual(fields, ["agent", "description", "interactions",
-                                  "corrections", "finished", "uid"])
+                                  "corrections", "finished", "uid", "agents.model"])
 
     def test_measurement_already_in_the_newest_version_is_left_alone(self) -> None:
-        document = dict(VERSION_ONE, schema_version=2, uid="a" * 32, migration_gaps=[])
-        path = self.write("a.json", document, RAW)
+        document = {key: value for key, value in VERSION_ONE.items() if key != "agent"}
+        document.update(schema_version=3, uid="a" * 32, migration_gaps=[],
+                        agents=[{"name": "Claude Code", "model": "claude-opus-5",
+                                 "sessions": ["s"]}])
+        path = self.write("a.yaml", document, RAW)
         found = self.chain(path)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(found["gates"], [])
         self.assertTrue(path.exists())
-        self.assertIn("jest już w wersji 2", found["notices"][0]["message"])
+        self.assertIn("jest już w wersji 3", found["notices"][0]["message"])
 
     def test_declared_version_that_does_not_match_the_content(self) -> None:
         path = self.write("a.json", VERSION_ONE, RAW)
@@ -97,7 +101,7 @@ class MigrateTest(unittest.TestCase):
     def test_chain_stops_on_the_step_that_fails(self) -> None:
         broken = dict(VERSION_ZERO)
         del broken["run_id"]
-        path = self.write("a-20260820T192700Z.json", broken, schema.LEGACY_DIRECTORY)
+        path = self.write("a-20260820T192700Z.json", broken, kinds.LEGACY_DIRECTORY)
         found = self.chain(path)
         self.assertEqual(found["result"], "FAIL")
         self.assertEqual(found["version"], 0)
@@ -105,18 +109,21 @@ class MigrateTest(unittest.TestCase):
         self.assertTrue(path.exists())
 
     def test_missing_script_for_a_pair_of_versions(self) -> None:
-        (self.schemas / "3.json").write_text(
-            (self.schemas / "2.json").read_text(encoding="utf-8"), encoding="utf-8")
-        document = dict(VERSION_ONE, schema_version=2, uid="a" * 32, migration_gaps=[])
-        path = self.write("a.json", document, RAW)
+        (self.schemas / "4.yaml").write_text(
+            (self.schemas / "3.yaml").read_text(encoding="utf-8"), encoding="utf-8")
+        document = {key: value for key, value in VERSION_ONE.items() if key != "agent"}
+        document.update(schema_version=3, uid="a" * 32, migration_gaps=[],
+                        agents=[{"name": "Claude Code", "model": "claude-opus-5",
+                                 "sessions": ["s"]}])
+        path = self.write("a.yaml", document, RAW)
         found = self.chain(path)
         self.assertEqual(found["result"], "FAIL")
-        self.assertIn("brak skryptu migracji z wersji 2 do 3",
+        self.assertIn("brak skryptu migracji z wersji 3 do 4",
                       found["errors"][0]["message"])
 
     def test_target_version_given_on_the_call(self) -> None:
         path = self.write("agent-skills-protokol-a-b-20260820T192700Z.json",
-                          VERSION_ZERO, schema.LEGACY_DIRECTORY)
+                          VERSION_ZERO, kinds.LEGACY_DIRECTORY)
         found = self.chain(path, target=1)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(found["version"], 1)
@@ -124,7 +131,7 @@ class MigrateTest(unittest.TestCase):
 
     def test_without_apply_only_the_first_step_runs(self) -> None:
         path = self.write("agent-skills-protokol-a-b-20260820T192700Z.json",
-                          VERSION_ZERO, schema.LEGACY_DIRECTORY)
+                          VERSION_ZERO, kinds.LEGACY_DIRECTORY)
         found = self.chain(path, apply=False)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(len(found["gates"]), 1)
@@ -149,6 +156,18 @@ class MigrateTest(unittest.TestCase):
         found = self.chain(path)
         self.assertEqual(found["result"], "FAIL")
         self.assertIn("schema_version", found["errors"][0]["message"])
+
+
+class StepScriptTest(unittest.TestCase):
+    """Each kind has its own migration scripts (SDLC-0030)."""
+
+    def test_protocol_runs_keep_the_first_names(self) -> None:
+        self.assertEqual(migrate.step_script(2, 3).name, "migrate_2_to_3.py")
+
+    def test_another_kind_carries_its_name(self) -> None:
+        script = migrate.step_script(1, 2, kinds.PERFORMANCE_KIND)
+        self.assertEqual(script.name, "migrate_performance_1_to_2.py")
+        self.assertTrue(script.is_file())
 
 
 if __name__ == "__main__":

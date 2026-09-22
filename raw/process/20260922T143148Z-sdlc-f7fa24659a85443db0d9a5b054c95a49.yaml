@@ -1,0 +1,48 @@
+schema_version: 3
+uid: f7fa24659a85443db0d9a5b054c95a49
+protocol: B
+name: realizacja projektu zmiany
+project: sdlc
+description: "Realizacja projektu: schematy i pomiary w YAML, walidator konwencji i agent przy każdym kroku"
+migration_gaps: []
+started: 20260922T130644Z
+interactions: 5
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 5
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 2
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 3
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 0
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 9
+agents:
+  - name: Claude Opus 5
+    model: nieznany
+    sessions:
+      - 198fa0aa-df14-45d4-8340-8cf407099ba7
+  - name: Claude Code
+    model: claude-opus-5
+    sessions:
+      - 198fa0aa-df14-45d4-8340-8cf407099ba7
+finished: 20260922T143148Z

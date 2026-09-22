@@ -22,12 +22,13 @@ import sys
 from pathlib import Path
 from typing import Dict, List, Optional
 
-import schema
+import convention
+import kinds
 import usage
 
 GATE = "metrics:schema"
 RULE = "SDLC-0013"
-SUFFIX = ".json"
+SUFFIXES = (".json", ".yaml")
 
 
 def repository_root(script: Path) -> Path:
@@ -39,7 +40,7 @@ def measurements(root: Path, arguments: List[str]) -> List[Path]:
     """Files to check: the ones named, or every kind of the raw directory."""
     if arguments:
         return [Path(argument) for argument in arguments]
-    place = root / schema.RAW_DIRECTORY
+    place = root / kinds.RAW_DIRECTORY
     if not place.is_dir():
         return []
     found = []
@@ -64,28 +65,32 @@ def finding(subject: str, message: str) -> Dict[str, object]:
 def check_file(root: Path, path: Path) -> List[Dict[str, object]]:
     """Problems of one measurement, each as a finding."""
     subject = named(root, path)
-    if path.suffix != SUFFIX:
-        return [finding(subject, "pomiar zapisuje się jako osobny plik {}".format(SUFFIX))]
+    if path.suffix not in SUFFIXES:
+        return [finding(subject, "pomiar zapisuje się jako osobny plik {}".format(
+            " albo ".join(SUFFIXES)))]
     try:
-        document = json.loads(path.read_text(encoding="utf-8"))
-    except OSError as error:
+        document = kinds.read(path)
+    except ValueError as error:
         return [finding(subject, "nie udało się odczytać pomiaru ({})".format(error))]
-    except ValueError as error:
-        return [finding(subject, "nie jest poprawnym JSON-em ({})".format(error))]
     try:
-        version = schema.version_of(document, path)
+        version = kinds.version_of(document, path)
     except ValueError as error:
         return [finding(subject, str(error))]
     try:
-        kind = schema.kind_of(document, path, root)
+        kind = kinds.kind_of(document, path, root)
     except ValueError as error:
         return [finding(subject, str(error))]
     try:
-        problems = schema.validate(document, version, root, kind)
+        problems = kinds.validate(document, version, root, kind)
     except ValueError as error:
         return [finding(subject, str(error))]
-    return [finding(subject, "rodzaj {}, wersja {}: {}".format(kind, version, problem))
-            for problem in problems]
+    found = [finding(subject, "rodzaj {}, wersja {}: {}".format(kind, version, problem))
+             for problem in problems]
+    expected = kinds.suffix_for(kind, version)
+    if path.suffix != expected:
+        found.append(finding(subject, "pomiar rodzaju {} w wersji {} zapisuje się jako "
+                                      "plik {}".format(kind, version, expected)))
+    return found
 
 
 def report(errors: List[Dict[str, object]],
@@ -100,9 +105,26 @@ def report(errors: List[Dict[str, object]],
     }
 
 
+def schema_files(root: Path) -> List[Dict[str, object]]:
+    """Schemas written in anything but YAML (SDLC-0042)."""
+    place = root / kinds.SCHEMAS_DIRECTORY
+    if not place.is_dir():
+        return []
+    return [finding(named(root, path), "schemat zapisuje się jako plik <wersja>{}".format(
+                kinds.SCHEMA_SUFFIX))
+            for kind in sorted(path for path in place.iterdir() if path.is_dir())
+            for path in sorted(kind.iterdir())
+            if path.is_file() and not kinds.VERSION_NAME.match(path.name)]
+
+
 def run(root: Path, arguments: List[str]) -> Dict[str, object]:
-    errors: List[Dict[str, object]] = []
+    errors: List[Dict[str, object]] = schema_files(root)
     notices: List[Dict[str, object]] = []
+    try:
+        convention.validator()
+    except convention.MissingLibrary as error:
+        errors.append(finding(GATE, str(error)))
+        return report(errors, notices)
     paths = measurements(root, arguments)
     if not paths:
         notices.append(finding(GATE, "nie ma pomiarów do sprawdzenia"))

@@ -5,16 +5,18 @@ import json
 import sys
 import tempfile
 import unittest
+from unittest import mock
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
-import schema
+import convention
+import kinds
 import validate
 
 # Schemas and measurements live in the directory of their kind (SDLC-0030).
-SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
-RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+SCHEMAS = "{}/{}".format(kinds.SCHEMAS_DIRECTORY, kinds.PROCESS_KIND)
+RAW = "{}/{}".format(kinds.RAW_DIRECTORY, kinds.PROCESS_KIND)
 
 MEASUREMENT = {
     "protocol": "A",
@@ -33,11 +35,11 @@ class ValidateTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.PROCESS_KIND,
-                                 schema.repository_root(Path(schema.__file__)))
+        source = kinds.directory(kinds.PROCESS_KIND,
+                                 kinds.repository_root(Path(kinds.__file__)))
         target = self.root / SCHEMAS
         target.mkdir(parents=True)
-        for path in source.glob("*.json"):
+        for path in source.glob("*.yaml"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
         (self.root / RAW).mkdir(parents=True)
@@ -65,7 +67,7 @@ class ValidateTest(unittest.TestCase):
         self.write("a.json", broken)
         found = self.run_gate()
         self.assertEqual(found["result"], "FAIL")
-        self.assertIn("brak pola interactions", found["errors"][0]["message"])
+        self.assertIn("brak wymaganego pola interactions", found["errors"][0]["message"])
         self.assertEqual(found["errors"][0]["subject"], "raw/process/a.json")
 
     def test_version_without_a_schema(self) -> None:
@@ -84,7 +86,41 @@ class ValidateTest(unittest.TestCase):
         self.write("a.json", "{")
         found = self.run_gate()
         self.assertEqual(found["result"], "FAIL")
-        self.assertIn("nie jest poprawnym JSON-em", found["errors"][0]["message"])
+        self.assertIn("niepoprawny JSON", found["errors"][0]["message"])
+
+    def test_missing_convention_is_a_failure_not_a_crash(self) -> None:
+        refused = convention.MissingLibrary("brak konwencji")
+        with mock.patch.object(convention, "validator", side_effect=refused):
+            found = self.run_gate()
+        self.assertEqual(found["result"], "FAIL")
+        self.assertEqual(found["errors"][0]["message"], "brak konwencji")
+
+    def test_schema_written_in_json_is_an_error(self) -> None:
+        (self.root / SCHEMAS / "2.json").write_text("{}", encoding="utf-8")
+        found = self.run_gate()
+        self.assertEqual(found["result"], "FAIL")
+        self.assertEqual(found["errors"][0]["subject"], "schemas/process/2.json")
+
+    def test_yaml_file_of_an_older_version_is_an_error(self) -> None:
+        path = self.root / RAW / "a.yaml"
+        path.write_text(json.dumps(MEASUREMENT), encoding="utf-8")
+        found = self.run_gate()
+        self.assertEqual(found["result"], "FAIL")
+        self.assertIn("zapisuje się jako plik .json", found["errors"][0]["message"])
+
+    def test_json_file_of_version_three_is_an_error(self) -> None:
+        schema = kinds.directory(kinds.PROCESS_KIND,
+                                 kinds.repository_root(Path(kinds.__file__))) / "3.yaml"
+        (self.root / SCHEMAS / "3.yaml").write_text(schema.read_text(encoding="utf-8"),
+                                                    encoding="utf-8")
+        document = {key: value for key, value in MEASUREMENT.items() if key != "agent"}
+        document.update(schema_version=3, uid="a" * 32, migration_gaps=[],
+                        agents=[{"name": "Claude Code", "model": "claude-opus-5",
+                                 "sessions": ["s"]}])
+        self.write("a.json", document)
+        found = self.run_gate()
+        self.assertEqual([error["message"] for error in found["errors"]],
+                         ["pomiar rodzaju process w wersji 3 zapisuje się jako plik .yaml"])
 
     def test_file_with_another_suffix(self) -> None:
         self.write("a.txt", MEASUREMENT)
@@ -110,7 +146,7 @@ class ValidateTest(unittest.TestCase):
     def test_legacy_file_is_read_as_version_zero(self) -> None:
         path = self.write("a.json", {"project": "sdlc", "process": "protokol-a-b",
                                      "run_id": "abc1234", "measurements": {}},
-                          schema.LEGACY_DIRECTORY)
+                          kinds.LEGACY_DIRECTORY)
         self.assertEqual(self.run_gate(str(path))["result"], "PASS")
 
     def test_measurement_of_version_two(self) -> None:
@@ -123,7 +159,7 @@ class ValidateTest(unittest.TestCase):
         self.write("a.json", document)
         found = self.run_gate()
         self.assertEqual(found["result"], "FAIL")
-        self.assertIn("brak pola uid", found["errors"][0]["message"])
+        self.assertIn("brak wymaganego pola uid", found["errors"][0]["message"])
 
 
 if __name__ == "__main__":

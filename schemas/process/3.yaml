@@ -1,0 +1,165 @@
+$schema: https://json-schema.org/draft/2020-12/schema
+title: Pomiar procesu, wersja 3
+description: Kształt pomiaru zapisywanego w YAML, z listą agentów i modeli, które wykonywały kroki przebiegu, zamiast jednego agenta (SDLC-0042, SDLC-0043).
+type: object
+additionalProperties: false
+required:
+  - schema_version
+  - uid
+  - protocol
+  - name
+  - project
+  - agents
+  - description
+  - interactions
+  - corrections
+  - measurements
+  - migration_gaps
+properties:
+  schema_version:
+    type: integer
+    enum:
+      - 3
+    description: Wersja schematu, według której czyta się ten plik. Od tej wersji pomiar przebiegu jest plikiem YAML.
+  uid:
+    type: string
+    pattern: ^[0-9a-f]{32}$
+    description: "Niepowtarzalny identyfikator wywołania protokołu: UUID w wersji 4 zapisany bez myślników. Nadaje go otwarcie przebiegu. Rozróżnia dwa przebiegi zamknięte w tej samej sekundzie i nie wymaga uzgodnienia między projektami. To nie jest run_id, który wskazuje commit."
+  protocol:
+    type: string
+    pattern: ^[A-Z0-9]+(?:-[A-Z0-9]+)*$
+    description: Identyfikator protokołu w tym projekcie, na przykład A. Wielkie litery, cyfry i myślnik.
+  name:
+    $ref: "#/$defs/name"
+    description: Nazwa protokołu, na przykład planowanie zmiany.
+  project:
+    $ref: "#/$defs/name"
+    description: Nazwa projektu, czyli repozytorium developerskiego bez przyrostka.
+  agents:
+    type: array
+    minItems: 1
+    description: Agenci i modele, które wykonywały kroki przebiegu, w kolejności pierwszego pojawienia się. Zamknięcie składa listę z agentów zapisanych przy krokach deskryptora i z agenta z otwarcia przebiegu; para narzędzia i modelu nie powtarza się na liście.
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - name
+        - model
+        - sessions
+      description: Jeden agent z modelem.
+      properties:
+        name:
+          $ref: "#/$defs/name"
+          description: Narzędzie agenta, na przykład Claude Code.
+        model:
+          $ref: "#/$defs/name"
+          description: Identyfikator modelu, na przykład claude-opus-5. Wartość nieznany znaczy, że pomiar przeszedł migrację z wersji, która modelu nie zapisywała.
+        sessions:
+          type: array
+          minItems: 1
+          description: Identyfikatory sesji, w których ten agent pracował nad przebiegiem. Lista, bo przebieg bywa wznawiany.
+          items:
+            $ref: "#/$defs/name"
+            description: Identyfikator jednej sesji.
+  description:
+    $ref: "#/$defs/description"
+    description: Czego dotyczył przebieg. Przy przebiegu zatrzymanym mówi, na czym stanął.
+  interactions:
+    $ref: "#/$defs/count"
+    description: "Liczba wymian z człowiekiem: pytanie, odpowiedź, uwaga, potwierdzenie."
+  corrections:
+    type: array
+    description: "Poprawki działania protokołu: co właściciel musiał naprawić w przebiegu."
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - kind
+        - description
+      description: Jedna poprawka.
+      properties:
+        kind:
+          type: string
+          enum:
+            - zakres
+            - tresc
+            - proces
+            - jezyk
+            - decyzja
+            - narzedzie
+          description: Rodzaj poprawki z zamkniętej listy, bo dopiero to pozwala je zliczyć. Kiedy który, mówi wytyczna o pomiarze procesu.
+        description:
+          $ref: "#/$defs/description"
+          description: Co właściciel musiał naprawić.
+  measurements:
+    $ref: "#/$defs/measurements"
+    description: Wielkości właściwe dla protokołu; wymienia je wytyczna o pomiarze procesu albo dokument protokołu.
+  migration_gaps:
+    type: array
+    description: Czego migracja nie umiała dostarczyć. Pusta lista w pomiarze zapisanym od razu w tej wersji. Niepusta znaczy, że części wartości nie wolno ufać.
+    items:
+      type: object
+      additionalProperties: false
+      required:
+        - field
+        - from_version
+        - reason
+      description: Jeden brak.
+      properties:
+        field:
+          $ref: "#/$defs/name"
+          description: Nazwa pola, którego migracja nie umiała wypełnić treścią z pliku źródłowego.
+        from_version:
+          type: integer
+          minimum: 0
+          description: Wersja schematu, z której brak pochodzi, czyli wersja wejściowa migracji, która go odnotowała.
+        reason:
+          $ref: "#/$defs/description"
+          description: Dlaczego pola nie dało się wypełnić i co stoi w nim zamiast treści.
+  started:
+    $ref: "#/$defs/stamp"
+    description: Znacznik czasu otwarcia przebiegu. Pole nieobowiązkowe.
+  finished:
+    $ref: "#/$defs/stamp"
+    description: Znacznik czasu zamknięcia przebiegu. Pole nieobowiązkowe.
+  run_id:
+    $ref: "#/$defs/name"
+    description: Identyfikator commita, w którym zmiana trafiła do repozytorium. Pole nieobowiązkowe.
+$defs:
+  name:
+    type: string
+    minLength: 1
+    maxLength: 120
+    pattern: \S
+    description: Krótki tekst do 120 znaków, niepusty.
+  description:
+    type: string
+    minLength: 1
+    maxLength: 200
+    pattern: \S
+    description: Tekst do 200 znaków, niepusty.
+  count:
+    type: integer
+    minimum: 0
+    description: Liczba całkowita nieujemna.
+  stamp:
+    type: string
+    pattern: ^\d{8}T\d{6}Z$
+    description: Znacznik czasu w postaci RRRRMMDDTGGMMSSZ, w czasie UTC.
+  measurements:
+    type: object
+    description: Wielkości protokołu; kluczem jest nazwa wielkości.
+    additionalProperties:
+      type: object
+      additionalProperties: false
+      required:
+        - definition
+        - value
+      description: "Jedna wielkość: co zlicza i ile naliczyła."
+      properties:
+        definition:
+          $ref: "#/$defs/description"
+          description: Co ta wielkość zlicza. Definicja jedzie przy wartości, żeby zestawienie nie zestawiało wielkości o różnym znaczeniu.
+        value:
+          $ref: "#/$defs/count"
+          description: Zliczona wartość.

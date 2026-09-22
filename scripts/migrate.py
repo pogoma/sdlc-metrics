@@ -24,13 +24,16 @@ import tempfile
 from pathlib import Path
 from typing import Dict, List, Optional
 
-import schema
+import kinds
 import usage
 
 GATE = "metrics:migrate"
 RULE = "SDLC-0013"
 MIGRATIONS = "migrations"
 SCRIPT_NAME = "migrate_{}_to_{}.py"
+# Migrations of protocol runs came first and keep their names; any other kind
+# carries its name in the name of the script (SDLC-0030).
+KIND_SCRIPT_NAME = "migrate_{}_{}_to_{}.py"
 
 
 def repository_root(script: Path) -> Path:
@@ -55,12 +58,12 @@ def finding(subject: str, message: str) -> Dict[str, object]:
 
 
 def read(path: Path) -> object:
-    return json.loads(path.read_text(encoding="utf-8"))
+    return kinds.read(path)
 
 
-def starting_version(root: Path, path: Path, declared: Optional[int],
-                     errors: List[Dict[str, object]]) -> Optional[int]:
-    """Version the chain starts from, checked against the content of the file."""
+def starting_point(root: Path, path: Path, declared: Optional[int],
+                   errors: List[Dict[str, object]]) -> Optional[tuple]:
+    """Kind and version the chain starts from, checked against the file."""
     subject = named(root, path)
     try:
         document = read(path)
@@ -68,7 +71,8 @@ def starting_version(root: Path, path: Path, declared: Optional[int],
         errors.append(finding(subject, "nie udało się odczytać pomiaru ({})".format(error)))
         return None
     try:
-        found = schema.version_of(document, path)
+        found = kinds.version_of(document, path)
+        kind = kinds.kind_of(document, path, root)
     except ValueError as error:
         errors.append(finding(subject, str(error)))
         return None
@@ -76,17 +80,20 @@ def starting_version(root: Path, path: Path, declared: Optional[int],
         errors.append(finding(subject, "podano wersję {}, a plik jest w wersji {}".format(
             declared, found)))
         return None
-    return found
+    return kind, found
 
 
-def step_script(source: int, target: int) -> Path:
-    return migrations_directory() / SCRIPT_NAME.format(source, target)
+def step_script(source: int, target: int, kind: str = kinds.PROCESS_KIND) -> Path:
+    if kind == kinds.PROCESS_KIND:
+        return migrations_directory() / SCRIPT_NAME.format(source, target)
+    return migrations_directory() / KIND_SCRIPT_NAME.format(kind, source, target)
 
 
 def run_step(root: Path, path: Path, source: int, target: int,
-             gaps: List[Dict[str, object]], apply: bool) -> Dict[str, object]:
+             gaps: List[Dict[str, object]], apply: bool,
+             kind: str = kinds.PROCESS_KIND) -> Dict[str, object]:
     """Report of one migration script, run as its own process."""
-    script = step_script(source, target)
+    script = step_script(source, target, kind)
     arguments = [sys.executable, str(script), str(path), "--root", str(root)]
     if apply:
         arguments.append("--apply")
@@ -125,12 +132,12 @@ def run(root: Path, path: Path, declared: Optional[int], wanted: Optional[int],
     subject = named(root, path)
     if not path.is_file():
         return report([finding(subject, "nie ma takiego pliku")], notices, gates, None)
-    version = starting_version(root, path, declared, errors)
-    if version is None:
+    point = starting_point(root, path, declared, errors)
+    if point is None:
         return report(errors, notices, gates, None)
+    kind, version = point
     try:
-        target = wanted if wanted is not None else schema.latest(
-            schema.PROCESS_KIND, root)
+        target = wanted if wanted is not None else kinds.latest(kind, root)
     except ValueError as error:
         return report([finding(subject, str(error))], notices, gates, None)
     if version >= target:
@@ -139,11 +146,11 @@ def run(root: Path, path: Path, declared: Optional[int], wanted: Optional[int],
     gaps: List[Dict[str, object]] = []
     current = path
     while version < target:
-        if not step_script(version, version + 1).is_file():
+        if not step_script(version, version + 1, kind).is_file():
             errors.append(finding(subject, "brak skryptu migracji z wersji {} do {}".format(
                 version, version + 1)))
             break
-        answer = run_step(root, current, version, version + 1, gaps, apply)
+        answer = run_step(root, current, version, version + 1, gaps, apply, kind)
         gates.append(answer)
         if answer.get("result") != "PASS":
             errors.append(finding(subject, "migracja stanęła na wersji {}".format(version)))

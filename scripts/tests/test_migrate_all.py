@@ -11,11 +11,11 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 
 import migrate_all
-import schema
+import kinds
 
 # Schemas and measurements live in the directory of their kind (SDLC-0030).
-SCHEMAS = "{}/{}".format(schema.SCHEMAS_DIRECTORY, schema.PROCESS_KIND)
-RAW = "{}/{}".format(schema.RAW_DIRECTORY, schema.PROCESS_KIND)
+SCHEMAS = "{}/{}".format(kinds.SCHEMAS_DIRECTORY, kinds.PROCESS_KIND)
+RAW = "{}/{}".format(kinds.RAW_DIRECTORY, kinds.PROCESS_KIND)
 
 VERSION_ZERO = {
     "project": "agent-skills",
@@ -42,15 +42,15 @@ class MigrateAllTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.PROCESS_KIND,
-                                 schema.repository_root(Path(schema.__file__)))
+        source = kinds.directory(kinds.PROCESS_KIND,
+                                 kinds.repository_root(Path(kinds.__file__)))
         target = self.root / SCHEMAS
         target.mkdir(parents=True)
-        for path in source.glob("*.json"):
+        for path in source.glob("*.yaml"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
         (self.root / RAW).mkdir(parents=True)
-        (self.root / schema.LEGACY_DIRECTORY).mkdir()
+        (self.root / kinds.LEGACY_DIRECTORY).mkdir()
 
     def write(self, name: str, document: object, directory: str) -> Path:
         path = self.root / directory / name
@@ -65,13 +65,15 @@ class MigrateAllTest(unittest.TestCase):
         self.write("sdlc-A-20260102T120000Z.json",
                    dict(VERSION_ONE, finished="20260102T120000Z"),
                    RAW)
-        self.write("gotowy.json",
-                   dict(VERSION_ONE, schema_version=2, uid="a" * 32, migration_gaps=[]),
-                   RAW)
+        ready = {key: value for key, value in VERSION_ONE.items() if key != "agent"}
+        ready.update(schema_version=3, uid="a" * 32, migration_gaps=[],
+                     agents=[{"name": "Claude Code", "model": "claude-opus-5",
+                              "sessions": ["s"]}])
+        self.write("gotowy.yaml", ready, RAW)
         found = migrate_all.run(self.root, RAW, True)
         self.assertEqual(found["result"], "PASS")
         self.assertEqual(len(self.raw()), 3)
-        self.assertIn("gotowy.json", self.raw())
+        self.assertIn("gotowy.yaml", self.raw())
 
     def test_files_written_by_the_migration_are_not_migrated_again(self) -> None:
         self.write("sdlc-A-20260101T120000Z.json", VERSION_ONE, RAW)
@@ -138,10 +140,10 @@ class MigrateAllTest(unittest.TestCase):
 
     def test_legacy_directory(self) -> None:
         self.write("agent-skills-protokol-a-b-20260820T192700Z.json",
-                   VERSION_ZERO, schema.LEGACY_DIRECTORY)
-        found = migrate_all.run(self.root, schema.LEGACY_DIRECTORY, True)
+                   VERSION_ZERO, kinds.LEGACY_DIRECTORY)
+        found = migrate_all.run(self.root, kinds.LEGACY_DIRECTORY, True)
         self.assertEqual(found["result"], "PASS")
-        self.assertEqual(list((self.root / schema.LEGACY_DIRECTORY).iterdir()), [])
+        self.assertEqual(list((self.root / kinds.LEGACY_DIRECTORY).iterdir()), [])
         self.assertEqual(len(self.raw()), 1)
 
     def test_without_apply_nothing_changes(self) -> None:

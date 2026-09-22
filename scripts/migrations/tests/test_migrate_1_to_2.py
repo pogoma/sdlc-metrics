@@ -14,7 +14,7 @@ sys.path.insert(0, str(SCRIPTS / "migrations"))
 
 import migration
 import migrate_1_to_2
-import schema
+import kinds
 
 SCRIPT = SCRIPTS / "migrations" / "migrate_1_to_2.py"
 
@@ -38,17 +38,17 @@ class MigrateOneToTwoTest(unittest.TestCase):
         self.place = tempfile.TemporaryDirectory()
         self.root = Path(self.place.name)
         self.addCleanup(self.place.cleanup)
-        source = schema.directory(schema.PROCESS_KIND,
-                                  schema.repository_root(Path(schema.__file__)))
-        target = self.root / schema.SCHEMAS_DIRECTORY / schema.PROCESS_KIND
+        source = kinds.directory(kinds.PROCESS_KIND,
+                                  kinds.repository_root(Path(kinds.__file__)))
+        target = self.root / kinds.SCHEMAS_DIRECTORY / kinds.PROCESS_KIND
         target.mkdir(parents=True)
-        for path in source.glob("*.json"):
+        for path in source.glob("*.yaml"):
             (target / path.name).write_text(path.read_text(encoding="utf-8"),
                                             encoding="utf-8")
-        (self.root / schema.RAW_DIRECTORY / schema.PROCESS_KIND).mkdir(parents=True)
+        (self.root / kinds.RAW_DIRECTORY / kinds.PROCESS_KIND).mkdir(parents=True)
 
     def write(self, name: str, document: object) -> Path:
-        path = self.root / schema.RAW_DIRECTORY / schema.PROCESS_KIND / name
+        path = self.root / kinds.RAW_DIRECTORY / kinds.PROCESS_KIND / name
         path.write_text(json.dumps(document, ensure_ascii=False), encoding="utf-8")
         return path
 
@@ -80,7 +80,7 @@ class MigrateOneToTwoTest(unittest.TestCase):
         report = self.call(path, "--apply")
         self.assertFalse(path.exists())
         stored = json.loads((self.root / report["target"]).read_text(encoding="utf-8"))
-        self.assertEqual(schema.validate(stored, 2, self.root), [])
+        self.assertEqual(kinds.validate(stored, 2, self.root), [])
 
     def test_measurement_without_a_finish_stamp_records_a_gap(self) -> None:
         document = dict(VERSION_ONE)

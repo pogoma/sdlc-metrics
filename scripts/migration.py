@@ -32,7 +32,8 @@ import uuid
 from pathlib import Path
 from typing import Callable, Dict, List, Optional
 
-import schema
+import convention
+import kinds
 import usage
 
 DAMAGED_DIRECTORY = "damaged"
@@ -127,16 +128,22 @@ def read_carried(path: Optional[str], report: Report) -> List[Dict[str, object]]
 
 
 def migrate(root: Path, path: Path, source: int, target: int, transform: Transform,
-            name: Name, carried: List[Dict[str, object]], apply: bool) -> Report:
+            name: Name, carried: List[Dict[str, object]], apply: bool,
+            kind: str = kinds.PROCESS_KIND) -> Report:
     """One step of migration, from reading the file to removing it."""
     report = Report("metrics:migrate:{}-{}".format(source, target))
     subject = named(root, path)
+    try:
+        convention.validator()
+    except convention.MissingLibrary as error:
+        report.fail(subject, str(error))
+        return report
     document = read_measurement(path, subject, report)
     if document is None:
         return report
     if not correct_version(document, path, source, subject, report):
         return report
-    problems = schema.validate(document, source, root, schema.PROCESS_KIND)
+    problems = kinds.validate(document, source, root, kind)
     if problems:
         for problem in problems:
             report.fail(subject, "wersja {}: {}".format(source, problem))
@@ -146,12 +153,12 @@ def migrate(root: Path, path: Path, source: int, target: int, transform: Transfo
     gaps = list(carried)
     result = transform(document, gaps, path)
     report.gaps = gaps
-    place = schema.measurements_directory(schema.PROCESS_KIND, root) / name(result, path)
+    place = kinds.measurements_directory(kind, root) / name(result, path)
     if place.exists():
         report.fail(subject, "{}: plik o tej nazwie już istnieje".format(
             named(root, place)))
         return report
-    problems = schema.validate(result, target, root, schema.PROCESS_KIND)
+    problems = kinds.validate(result, target, root, kind)
     if problems:
         store_damaged(root, path, place.name, result, problems, subject, report, apply)
         return report
@@ -168,13 +175,13 @@ def migrate(root: Path, path: Path, source: int, target: int, transform: Transfo
 
 def read_measurement(path: Path, subject: str,
                      report: Report) -> Optional[Dict[str, object]]:
-    try:
-        document = json.loads(path.read_text(encoding="utf-8"))
-    except OSError as error:
-        report.fail(subject, "nie udało się odczytać pomiaru ({})".format(error))
+    if not path.is_file():
+        report.fail(subject, "nie udało się odczytać pomiaru (nie ma takiego pliku)")
         return None
+    try:
+        document = kinds.read(path)
     except ValueError as error:
-        report.fail(subject, "nie jest poprawnym JSON-em ({})".format(error))
+        report.fail(subject, "nie udało się odczytać pomiaru ({})".format(error))
         return None
     if not isinstance(document, dict):
         report.fail(subject, "pomiar nie jest obiektem")
@@ -185,7 +192,7 @@ def read_measurement(path: Path, subject: str,
 def correct_version(document: Dict[str, object], path: Path, source: int,
                     subject: str, report: Report) -> bool:
     try:
-        found = schema.version_of(document, path)
+        found = kinds.version_of(document, path)
     except ValueError as error:
         report.fail(subject, str(error))
         return False
@@ -214,9 +221,13 @@ def store_damaged(root: Path, path: Path, name: str, result: Dict[str, object],
 
 
 def write(path: Path, document: Dict[str, object]) -> None:
+    """Measurement in the format its name asks for: YAML or JSON (SDLC-0042)."""
     path.parent.mkdir(parents=True, exist_ok=True)
-    path.write_text(json.dumps(document, ensure_ascii=False, indent=2) + "\n",
-                    encoding="utf-8")
+    if path.suffix == kinds.YAML_SUFFIX:
+        text = convention.yaml().dump(document)
+    else:
+        text = json.dumps(document, ensure_ascii=False, indent=2) + "\n"
+    path.write_text(text, encoding="utf-8")
 
 
 def parse(argv: List[str], source: int, target: int) -> argparse.Namespace:
@@ -252,7 +263,7 @@ def usage_commands(source: int, target: int) -> tuple:
 
 
 def main(argv: List[str], script: Path, source: int, target: int,
-         transform: Transform, name: Name) -> int:
+         transform: Transform, name: Name, kind: str = kinds.PROCESS_KIND) -> int:
     """Entry point every migration script shares."""
     if usage.asked(argv):
         return usage.emit(usage.report(script.name, usage_commands(source, target)))
@@ -262,7 +273,7 @@ def main(argv: List[str], script: Path, source: int, target: int,
     carried = read_carried(options.carry_gaps, report)
     if not report.errors:
         report = migrate(root, Path(options.path), source, target, transform, name,
-                         carried, options.apply)
+                         carried, options.apply, kind)
     document = report.as_document()
     print(json.dumps(document, ensure_ascii=False, indent=2))
     return 0 if document["result"] == "PASS" else 1
