@@ -1,0 +1,38 @@
+schema_version: 3
+uid: b6a8b788e89d48129b3f797ff9e20535
+protocol: E
+name: migracja pomiarów
+project: sdlc
+description: Migracja pomiarów na process 3 i performance 2 w YAML
+migration_gaps: []
+started: 20260922T181005Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5
+    sessions:
+      - 198fa0aa-df14-45d4-8340-8cf407099ba7
+interactions: 2
+corrections: []
+measurements:
+  files_damaged:
+    definition: pliki, które trafiły do katalogu plików uszkodzonych
+    value: 0
+  files_migrated:
+    definition: pomiary przeniesione na nowszą wersję
+    value: 0
+  files_repaired:
+    definition: pliki uszkodzone doprowadzone do zgodności
+    value: 0
+  gaps_recorded:
+    definition: braki odnotowane w polu migration_gaps
+    value: 0
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 0
+  versions_crossed:
+    definition: przejścia między wersjami wykonane łącznie
+    value: 0
+finished: 20260922T181754Z
