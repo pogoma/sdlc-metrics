@@ -1,0 +1,38 @@
+schema_version: 3
+uid: e91a1f27566447bab05ef3a96888c7c2
+protocol: A
+name: planowanie zmiany
+project: sdlc
+description: Samodzielne operacje Git skryptów protokołu i przekazywalny deskryptor przebiegu
+migration_gaps: []
+started: 20260923T062522Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - f3261092-9ae0-4653-9e4b-3d844cf6c178
+interactions: 6
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 3
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 4
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 3
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 4
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 2
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 1
+finished: 20260923T071853Z
