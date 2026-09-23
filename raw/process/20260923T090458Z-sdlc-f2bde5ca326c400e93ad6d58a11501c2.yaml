@@ -1,0 +1,44 @@
+schema_version: 3
+uid: f2bde5ca326c400e93ad6d58a11501c2
+protocol: B
+name: realizacja projektu zmiany
+project: sdlc
+description: Realizacja samodzielnych operacji Git skryptów protokołu i przekazywalnego deskryptora
+migration_gaps: []
+started: 20260923T072654Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - f3261092-9ae0-4653-9e4b-3d844cf6c178
+interactions: 5
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 5
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 1
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 3
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 2
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 1
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 9
+finished: 20260923T090458Z

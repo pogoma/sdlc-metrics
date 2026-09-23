@@ -1,0 +1,33 @@
+schema_version: 3
+uid: ef57ca1a3d8a4d3c9e088fba5c552ab7
+protocol: C
+name: prosta zmiana
+project: sdlc
+description: "Walidacja: definicja pull requesta w słowniku procesu"
+migration_gaps: []
+started: 20260923T081752Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - f3261092-9ae0-4653-9e4b-3d844cf6c178
+      - walidacja-sesja-2
+interactions: 2
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 1
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260923T083908Z
