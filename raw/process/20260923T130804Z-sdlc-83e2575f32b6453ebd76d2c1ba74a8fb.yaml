@@ -1,0 +1,32 @@
+schema_version: 3
+uid: 83e2575f32b6453ebd76d2c1ba74a8fb
+protocol: C
+name: prosta zmiana
+project: sdlc
+description: Komunikaty commitów wydania w oddaniu bez .gitmessage
+migration_gaps: []
+started: 20260923T125553Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - f3261092-9ae0-4653-9e4b-3d844cf6c178
+interactions: 4
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 4
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 3
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260923T130804Z
