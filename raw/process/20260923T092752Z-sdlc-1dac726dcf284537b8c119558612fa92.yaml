@@ -1,0 +1,32 @@
+schema_version: 3
+uid: 1dac726dcf284537b8c119558612fa92
+protocol: C
+name: prosta zmiana
+project: sdlc
+description: Wkłady kroków przebiegu bez tytułu w komunikacie commita
+migration_gaps: []
+started: 20260923T090655Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - f3261092-9ae0-4653-9e4b-3d844cf6c178
+interactions: 3
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 6
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260923T092752Z
