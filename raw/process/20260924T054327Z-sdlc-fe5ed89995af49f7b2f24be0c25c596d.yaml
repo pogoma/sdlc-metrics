@@ -1,0 +1,29 @@
+schema_version: 3
+uid: fe5ed89995af49f7b2f24be0c25c596d
+protocol: H
+name: scalanie
+project: sdlc
+description: Scalenie przeglądu inboxa i prostej zmiany wywołania skryptów operacji
+migration_gaps: []
+started: 20260924T054231Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - 697ee17e-9df8-4122-8af9-f64d78e682d9
+interactions: 0
+corrections: []
+measurements:
+  checks_failed:
+    definition: pull requesty, których weryfikacja CI nie miała wyniku success w chwili sprawdzenia
+    value: 2
+  merged_without_checks:
+    definition: "scalenia bez zielonej weryfikacji CI: z --without-checks albo przy CI, które nie wystartowało z powodu rozliczeń konta albo którego repozytorium nie ma"
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  pull_requests_merged:
+    definition: scalone pull requesty
+    value: 2
+finished: 20260924T054327Z
