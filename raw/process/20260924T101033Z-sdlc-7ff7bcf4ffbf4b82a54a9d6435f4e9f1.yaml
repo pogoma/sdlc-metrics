@@ -1,0 +1,38 @@
+schema_version: 3
+uid: 7ff7bcf4ffbf4b82a54a9d6435f4e9f1
+protocol: A
+name: planowanie zmiany
+project: sdlc
+description: Deskryptor testów wydajnościowych woła polecenia zmieniające stan
+migration_gaps: []
+started: 20260924T094418Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - 697ee17e-9df8-4122-8af9-f64d78e682d9
+interactions: 3
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 1
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 1
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 2
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 1
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 0
+finished: 20260924T101033Z
