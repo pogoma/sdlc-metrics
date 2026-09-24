@@ -1,0 +1,32 @@
+schema_version: 3
+uid: 08bf210abc924b96bf216b08c4f40e6c
+protocol: C
+name: prosta zmiana
+project: sdlc
+description: Skrypty operacji wywoływane w procesie mechaniki zamiast osobnym interpreterem
+migration_gaps: []
+started: 20260924T052134Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - 697ee17e-9df8-4122-8af9-f64d78e682d9
+interactions: 2
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 3
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260924T053952Z
