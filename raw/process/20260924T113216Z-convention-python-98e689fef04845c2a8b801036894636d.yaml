@@ -1,0 +1,32 @@
+schema_version: 3
+uid: 98e689fef04845c2a8b801036894636d
+protocol: C
+name: prosta zmiana
+project: convention-python
+description: Wpis inboxa o ścieżce schematu w zgłoszeniu walidatora, przeniesiony z sdlc-devel
+migration_gaps: []
+started: 20260924T112633Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - 697ee17e-9df8-4122-8af9-f64d78e682d9
+interactions: 2
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260924T113216Z
