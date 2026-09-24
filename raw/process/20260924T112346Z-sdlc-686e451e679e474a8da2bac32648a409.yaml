@@ -1,0 +1,32 @@
+schema_version: 3
+uid: 686e451e679e474a8da2bac32648a409
+protocol: C
+name: prosta zmiana
+project: sdlc
+description: Wpis inboxa o otwarciu przebiegu poza gałęzią główną
+migration_gaps: []
+started: 20260924T111524Z
+agents:
+  - name: Claude Code
+    model: claude-opus-5-5
+    sessions:
+      - 697ee17e-9df8-4122-8af9-f64d78e682d9
+interactions: 2
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260924T112346Z
