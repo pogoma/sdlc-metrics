@@ -1,0 +1,44 @@
+schema_version: 3
+uid: a05fc84c62134788a94cc5b3776f76dd
+protocol: B
+name: realizacja projektu zmiany
+project: sdlc
+description: "Realizacja projektu zmiany: pomiar czasu skryptów procesu biblioteką konwencji"
+migration_gaps: []
+started: 20260925T071549Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 2
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 2
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 3
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 1
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 0
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 4
+finished: 20260925T072541Z
