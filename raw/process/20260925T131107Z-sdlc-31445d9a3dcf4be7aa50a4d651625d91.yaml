@@ -1,0 +1,44 @@
+schema_version: 3
+uid: 31445d9a3dcf4be7aa50a4d651625d91
+protocol: B
+name: realizacja projektu zmiany
+project: sdlc
+description: "Realizacja projektu zmiany: otwarcie przebiegu od gałęzi głównej"
+migration_gaps: []
+started: 20260925T125020Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 3
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 3
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 1
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 3
+finished: 20260925T131107Z
