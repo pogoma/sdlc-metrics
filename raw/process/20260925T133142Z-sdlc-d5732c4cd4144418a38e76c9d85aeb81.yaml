@@ -1,0 +1,38 @@
+schema_version: 3
+uid: d5732c4cd4144418a38e76c9d85aeb81
+protocol: A
+name: planowanie zmiany
+project: sdlc
+description: "Planowanie: jakość wpisów deskryptora testów wydajnościowych"
+migration_gaps: []
+started: 20260925T131926Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 3
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 1
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 1
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 3
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 1
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 0
+finished: 20260925T133142Z
