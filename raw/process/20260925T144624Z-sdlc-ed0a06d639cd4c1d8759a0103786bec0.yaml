@@ -1,0 +1,44 @@
+schema_version: 3
+uid: ed0a06d639cd4c1d8759a0103786bec0
+protocol: B
+name: realizacja projektu zmiany
+project: sdlc
+description: "Realizacja projektu zmiany: wpisy testów wydajnościowych mierzą pracę poleceń"
+migration_gaps: []
+started: 20260925T133313Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 5
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 2
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 3
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 1
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 5
+finished: 20260925T144624Z
