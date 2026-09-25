@@ -1,0 +1,38 @@
+schema_version: 3
+uid: 50f13061df1c457f8b96e39246fbe0ba
+protocol: D
+name: przegląd inboxa
+project: sdlc
+description: "Przegląd inboxa: cztery wpisy"
+migration_gaps: []
+started: 20260925T111945Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 1
+corrections: []
+measurements:
+  entries_planned:
+    definition: wpisy skierowane do planowania
+    value: 3
+  entries_rejected:
+    definition: wpisy odrzucone
+    value: 0
+  entries_research:
+    definition: wpisy skierowane na rozpoznanie
+    value: 0
+  entries_reviewed:
+    definition: wpisy wzięte pod uwagę
+    value: 4
+  entries_simple:
+    definition: wpisy załatwione prostą zmianą
+    value: 1
+  owner_rounds:
+    definition: ile razy czekano na decyzję właściciela
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260925T113207Z
