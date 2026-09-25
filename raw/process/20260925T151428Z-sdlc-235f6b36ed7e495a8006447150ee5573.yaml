@@ -1,0 +1,32 @@
+schema_version: 3
+uid: 235f6b36ed7e495a8006447150ee5573
+protocol: W
+name: wydanie wersji
+project: sdlc
+description: Wydanie wersji v15.0.0
+migration_gaps: []
+started: 20260925T151415Z
+agents:
+  - name: skrypt wydania
+    model: brak
+    sessions:
+      - skrypt wydania
+interactions: 1
+corrections: []
+measurements:
+  commits_released:
+    definition: commity produktu od poprzedniego tagu
+    value: 3
+  decisions_added:
+    definition: decyzje, które doszły od poprzedniego tagu
+    value: 0
+  decisions_changed:
+    definition: decyzje o zmienionej treści
+    value: 0
+  decisions_removed:
+    definition: decyzje zniesione
+    value: 0
+  resumptions:
+    definition: wywołania, które podjęły przerwane wydanie tej wersji
+    value: 0
+finished: 20260925T151428Z
