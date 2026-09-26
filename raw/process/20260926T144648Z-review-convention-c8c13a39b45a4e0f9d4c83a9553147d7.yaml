@@ -1,0 +1,44 @@
+schema_version: 3
+uid: c8c13a39b45a4e0f9d4c83a9553147d7
+protocol: B
+name: realizacja projektu zmiany
+project: review-convention
+description: Realizacja kolorowania składni w narzędziu przeglądu
+migration_gaps: []
+started: 20260926T140138Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 5
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 3
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 2
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 2
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 0
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 5
+finished: 20260926T144648Z
