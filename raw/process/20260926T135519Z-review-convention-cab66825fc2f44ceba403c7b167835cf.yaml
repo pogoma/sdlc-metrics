@@ -1,0 +1,38 @@
+schema_version: 3
+uid: cab66825fc2f44ceba403c7b167835cf
+protocol: A
+name: planowanie zmiany
+project: review-convention
+description: "Projekt zmiany: kolorowanie składni w narzędziu przeglądu"
+migration_gaps: []
+started: 20260926T134249Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 4
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 2
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 4
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 3
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 3
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 1
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 0
+finished: 20260926T135519Z
