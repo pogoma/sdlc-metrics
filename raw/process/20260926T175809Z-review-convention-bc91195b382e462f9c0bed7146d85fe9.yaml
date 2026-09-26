@@ -1,0 +1,44 @@
+schema_version: 3
+uid: bc91195b382e462f9c0bed7146d85fe9
+protocol: B
+name: realizacja projektu zmiany
+project: review-convention
+description: Realizacja widoku Markdown
+migration_gaps: []
+started: 20260926T172423Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 9
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 1
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 1
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 2
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 3
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 1
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 1
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 4
+finished: 20260926T175809Z
