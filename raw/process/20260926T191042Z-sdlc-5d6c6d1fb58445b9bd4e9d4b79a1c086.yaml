@@ -1,0 +1,44 @@
+schema_version: 3
+uid: 5d6c6d1fb58445b9bd4e9d4b79a1c086
+protocol: C
+name: prosta zmiana
+project: sdlc
+description: "Wpis inboxa: składanie commitów kontrolnych gubi wciągnięcie gałęzi głównej"
+migration_gaps: []
+started: 20260926T121539Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 3
+corrections: []
+measurements:
+  agent_review_findings:
+    definition: uwagi przeglądu agenta, wszystkich wag
+    value: 3
+  agent_review_fixed:
+    definition: uwagi przeglądu agenta naniesione przed przeglądem właściciela
+    value: 0
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 1
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  lessons_recorded:
+    definition: wpisy inboxa z wnioskiem zapisane przed zamknięciem przebiegu
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  scope_extensions:
+    definition: rozszerzenia zakresu przebiegu za zgodą właściciela, po jego pierwszym zapisie
+    value: 0
+finished: 20260926T191042Z
