@@ -1,0 +1,44 @@
+schema_version: 3
+uid: 0eb0fa4d57164b03a86479c826a1c0c4
+protocol: B
+name: realizacja projektu zmiany
+project: sdlc
+description: "Realizacja P4: wniosek po zamkniętym przebiegu"
+migration_gaps: []
+started: 20260926T102513Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 4
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 2
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 0
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 1
+finished: 20260926T103820Z
