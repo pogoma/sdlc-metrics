@@ -1,0 +1,44 @@
+schema_version: 3
+uid: 10df2e28dade42e2a0e0cfe4cda8db68
+protocol: B
+name: realizacja projektu zmiany
+project: review-convention
+description: Realizacja zakładek weryfikacji i przebiegu
+migration_gaps: []
+started: 20260926T165447Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 5
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 1
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 2
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 0
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 3
+finished: 20260926T170411Z
