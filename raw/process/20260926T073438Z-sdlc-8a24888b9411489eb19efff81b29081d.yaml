@@ -1,0 +1,50 @@
+schema_version: 3
+uid: 8a24888b9411489eb19efff81b29081d
+protocol: G
+name: research agentowych SDLC
+project: sdlc
+description: "Przebieg researchu agentowych SDLC: pierwszy materiał research-sdlc.md"
+migration_gaps: []
+started: 20260926T071400Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 5
+corrections: []
+measurements:
+  catalog_added:
+    definition: pozycje dopisane do katalogu w tym przebiegu
+    value: 6
+  catalog_entries:
+    definition: pozycje katalogu wzięte do tego przebiegu
+    value: 20
+  catalog_rejected:
+    definition: kandydaci odrzuceni na kryterium kwalifikacji
+    value: 2
+  differences_found:
+    definition: różnice wobec procesu rozwijanego tutaj
+    value: 19
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  maturity_unknown:
+    definition: oceny dojrzałości oznaczone brakiem danych
+    value: 19
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 3
+  recommendations:
+    definition: rekomendacje zapisane w materiale badawczym
+    value: 8
+  recommendations_accepted:
+    definition: rekomendacje, które właściciel przyjął do planowania zmiany
+    value: 7
+  sources_confirmed:
+    definition: pozycje z potwierdzonym źródłem autora i datą sprawdzenia
+    value: 19
+  stages_unreported:
+    definition: etapy zapisane jako nieopisane, zliczone po wszystkich pozycjach
+    value: 32
+finished: 20260926T073438Z
