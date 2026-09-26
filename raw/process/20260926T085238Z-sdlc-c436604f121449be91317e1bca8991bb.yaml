@@ -1,0 +1,38 @@
+schema_version: 3
+uid: c436604f121449be91317e1bca8991bb
+protocol: A
+name: planowanie zmiany
+project: sdlc
+description: "P2 z research-sdlc.md: kryteria ukończenia projektu zmiany z identyfikatorem i dowodem"
+migration_gaps: []
+started: 20260926T084627Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 4
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 1
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 1
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 1
+finished: 20260926T085238Z
