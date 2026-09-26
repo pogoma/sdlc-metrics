@@ -1,0 +1,44 @@
+schema_version: 3
+uid: 6aca142ac47946feb576535f62cdde44
+protocol: B
+name: realizacja projektu zmiany
+project: sdlc
+description: "Realizacja P7: pomiary bez modelu agenta poza przekrojem po agencie"
+migration_gaps: []
+started: 20260926T095555Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 2
+corrections: []
+measurements:
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 2
+  plan_gaps:
+    definition: ile razy projekt zmiany okazał się zły albo niepełny
+    value: 0
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  repositories_touched:
+    definition: repozytoria, które dostały commit
+    value: 1
+  review_corrections:
+    definition: odpowiedzi „poprawki” w pętli przeglądu
+    value: 0
+  review_rounds:
+    definition: prośby o przegląd
+    value: 1
+  scope_conflicts:
+    definition: uwagi wykraczające poza sekcję „Poza zakresem”
+    value: 0
+  steps_deviated:
+    definition: kroki, których wynik rozjechał się z zapisanym
+    value: 0
+  steps_total:
+    definition: kroki wykonawcze zapisane w projekcie zmiany
+    value: 2
+finished: 20260926T100221Z
