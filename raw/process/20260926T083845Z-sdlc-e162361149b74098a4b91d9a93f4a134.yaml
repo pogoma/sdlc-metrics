@@ -1,0 +1,38 @@
+schema_version: 3
+uid: e162361149b74098a4b91d9a93f4a134
+protocol: A
+name: planowanie zmiany
+project: sdlc
+description: "P4 z research-sdlc.md: wniosek po zamkniętym przebiegu czytany przez następne planowanie"
+migration_gaps: []
+started: 20260926T083333Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 4
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 1
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 1
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 3
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 1
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 1
+finished: 20260926T083845Z
