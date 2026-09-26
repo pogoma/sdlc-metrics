@@ -1,0 +1,32 @@
+schema_version: 3
+uid: b18b3c02b45b40abaa97720084c6abfd
+protocol: C
+name: prosta zmiana
+project: review-convention
+description: "Opis zakresu projektu: sposób przeglądania kodu i narzędzia techniczne do niego"
+migration_gaps: []
+started: 20260926T115021Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 3
+corrections: []
+measurements:
+  escalations:
+    definition: ile razy praca wróciła do planowania, bo dotykała zachowania
+    value: 0
+  files_changed:
+    definition: zmienione pliki
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 0
+  owner_stops:
+    definition: zatrzymania po decyzję właściciela
+    value: 2
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+finished: 20260926T121830Z
