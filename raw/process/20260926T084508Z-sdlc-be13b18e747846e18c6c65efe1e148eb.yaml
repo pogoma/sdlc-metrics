@@ -1,0 +1,38 @@
+schema_version: 3
+uid: be13b18e747846e18c6c65efe1e148eb
+protocol: A
+name: planowanie zmiany
+project: sdlc
+description: "P1 z research-sdlc.md: przegląd zmiany przez agenta w świeżym kontekście przed przeglądem właściciela"
+migration_gaps: []
+started: 20260926T084003Z
+agents:
+  - name: claude-code
+    model: claude-opus-5-5
+    sessions:
+      - nieznana
+interactions: 4
+corrections: []
+measurements:
+  approval_rounds:
+    definition: ile razy przedstawiono projekt zmiany do zatwierdzenia
+    value: 1
+  closure_loops:
+    definition: przebiegi pętli domknięcia
+    value: 2
+  gate_failures:
+    definition: przebiegi weryfikacji z wynikiem FAIL
+    value: 1
+  plan_questions:
+    definition: pytania przedstawione właścicielowi
+    value: 3
+  plan_revisions:
+    definition: zmiany planu przebiegu po jego zatwierdzeniu
+    value: 0
+  question_rounds:
+    definition: ile razy praca zatrzymała się na pytaniach
+    value: 1
+  research_requests:
+    definition: pytania o zgodę na oparcie się na materiale badawczym
+    value: 1
+finished: 20260926T084508Z
